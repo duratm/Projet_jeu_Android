@@ -1,4 +1,4 @@
-package com.example.gamecontroller;
+package com.example.wificontroller;
 
 import android.util.Log;
 
@@ -40,6 +40,7 @@ public class GameMessageManager {
                     }
 
                 } catch (IOException e) {
+                    Log.i("test", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
                     e.printStackTrace();
                 }
             }}.start();
