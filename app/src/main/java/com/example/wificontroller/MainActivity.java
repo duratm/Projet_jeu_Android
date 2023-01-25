@@ -1,5 +1,8 @@
 package com.example.wificontroller;
 
+import android.content.Intent;
+import android.view.View;
+import android.widget.FrameLayout;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -11,7 +14,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-    public static final String EXTRA_MESSAGE = "com.example.TP2_debut.goToController";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,10 +39,8 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    public void goToController(View view) {
-        Intent intent = new Intent(this, FirstContrller.class);
-        if (GameMessageManager.isConnected()){
+    public void control(View view) {
+        Intent intent = new Intent(this, ControllerActivity.class);
             startActivity(intent);
-        }
     }
 }
