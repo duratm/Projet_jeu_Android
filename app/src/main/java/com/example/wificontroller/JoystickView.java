@@ -1,5 +1,6 @@
-package com.example.gamecontroller;
+package com.example.wificontroller;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -64,8 +65,8 @@ public class JoystickView extends View{
    protected void onDraw(Canvas canvas) {
       super.onDraw(canvas);
       if (canvasCenterX == -1) {
-         int w = canvas.getWidth();
-         int h = canvas.getHeight();
+         int w = getWidth();
+         int h = getHeight();
 
          canvasCenterX = w / 2;
          canvasCenterY = h / 2;
@@ -97,6 +98,7 @@ public class JoystickView extends View{
       }
    }
 
+   @SuppressLint("ClickableViewAccessibility")
    @Override
    public boolean onTouchEvent(MotionEvent event) {
       switch (event.getAction())

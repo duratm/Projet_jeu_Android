@@ -1,4 +1,4 @@
-package com.example.gamecontroller;
+package com.example.wificontroller;
 
 import android.util.Log;
 
