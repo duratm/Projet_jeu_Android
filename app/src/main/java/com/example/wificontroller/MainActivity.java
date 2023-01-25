@@ -1,14 +1,17 @@
 package com.example.wificontroller;
 
 import androidx.appcompat.app.AppCompatActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
-
+    public static final String EXTRA_MESSAGE = "com.example.TP2_debut.goToController";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -23,6 +26,7 @@ public class MainActivity extends AppCompatActivity {
                         Log.i("Adresse cible", adressServer);
                         if (adressServer.equals("192.168.1.98")) {
                             GameMessageManager.connect(adressServer);
+                            goToController();
                         }
                         else {
                             TextView errorText = findViewById(R.id.error);
@@ -30,5 +34,10 @@ public class MainActivity extends AppCompatActivity {
                         }
                     }
                 });
+    }
+
+    public void goToController(View view) {
+        Intent intent = new Intent(this, FirstContrller.class);
+        startActivity(intent);
     }
 }
