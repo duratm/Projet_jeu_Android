@@ -23,10 +23,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         TextView textFromInput = findViewById(R.id.enter);
                         String adressServer = textFromInput.getText().toString();
-                        Log.i("Adresse cible", adressServer);
                         if (adressServer.equals("192.168.1.98")) {
                             GameMessageManager.connect(adressServer);
-                            goToController();
                         }
                         else {
                             TextView errorText = findViewById(R.id.error);

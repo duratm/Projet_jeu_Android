@@ -40,7 +40,6 @@ public class GameMessageManager {
                     }
 
                 } catch (IOException e) {
-                    Log.i("test", "AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
                     e.printStackTrace();
                 }
             }}.start();
