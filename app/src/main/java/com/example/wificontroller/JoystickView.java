@@ -1,4 +1,4 @@
-package com.example.gamecontroller;
+package com.example.wificontroller;
 
 import android.content.Context;
 import android.graphics.Canvas;
