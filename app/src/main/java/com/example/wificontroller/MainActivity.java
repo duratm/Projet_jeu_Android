@@ -23,19 +23,23 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         TextView textFromInput = findViewById(R.id.enter);
                         String adressServer = textFromInput.getText().toString();
-                        if (adressServer.equals("192.168.1.98")) {
+                        GameMessageManager.logActivity(true);
+                        if (adressServer.equals("192.168.1.98") || adressServer.equals("192.168.131.120")){
                             GameMessageManager.connect(adressServer);
                         }
-                        else {
+                        //GameMessageManager.sendMessage("MOTL=0.5");
+                    }
+                        /*else {
                             TextView errorText = findViewById(R.id.error);
                             errorText.setText("Une erreur est apparue lors de la connexion au serveur");
-                        }
-                    }
+                        }*/
                 });
     }
 
     public void goToController(View view) {
         Intent intent = new Intent(this, FirstContrller.class);
-        startActivity(intent);
+        if (GameMessageManager.isConnected()){
+            startActivity(intent);
+        }
     }
 }

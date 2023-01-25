@@ -38,7 +38,6 @@ public class GameMessageManager {
                         out = new DataOutputStream(soc.getOutputStream());
                         in = new DataInputStream(soc.getInputStream());
                     }
-
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
