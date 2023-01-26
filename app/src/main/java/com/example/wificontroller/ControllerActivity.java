@@ -30,8 +30,8 @@ public class ControllerActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                GameMessageManager.sendMessage("NAME=Mathias#COL=30945#MSG=Salut#ORIENT");
-                Log.i("kikoo", String.valueOf(GameMessageManager.getNextMessage()));
+                GameMessageManager.sendMessage("NAME=Mathias#COL="+getIntent().getStringExtra(MainActivity.COLOR)+"#MSG=Salut#ORIENT");
+                Log.i("kikoo", "NAME=Mathias#COL="+getIntent().getStringExtra(MainActivity.COLOR)+"#MSG=Salut#ORIENT");
 
             }
         }).start();
