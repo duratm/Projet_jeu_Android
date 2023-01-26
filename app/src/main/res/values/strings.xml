@@ -4,4 +4,6 @@
     <string name="enter">Server Adress</string>
     <string name="connection">Connection to Game</string>
     <string name="empty"></string>
+    <string name="Fire">Fire</string>
+    <string name="menuText">back to menu</string>
 </resources>

@@ -27,9 +27,8 @@ public class MainActivity extends AppCompatActivity {
                         TextView textFromInput = findViewById(R.id.enter);
                         String adressServer = textFromInput.getText().toString();
                         GameMessageManager.logActivity(true);
-                        if (adressServer.equals("192.168.1.98") || adressServer.equals("192.168.131.120")){
-                            GameMessageManager.connect(adressServer);
-                        }
+                        GameMessageManager.connect(adressServer);
+                        control(v);
                         //GameMessageManager.sendMessage("MOTL=0.5");
                     }
                         /*else {

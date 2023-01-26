@@ -8,8 +8,8 @@
 
     <FrameLayout
         android:id="@+id/frame"
-        android:layout_width="169dp"
-        android:layout_height="158dp"
+        android:layout_width="284dp"
+        android:layout_height="260dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.06"
@@ -18,4 +18,27 @@
         app:layout_constraintVertical_bias="0.972">
 
     </FrameLayout>
+
+    <Button
+        android:id="@+id/fire"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Fire"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.483"
+        app:layout_constraintStart_toEndOf="@+id/frame"
+        app:layout_constraintTop_toTopOf="@+id/frame"
+        app:layout_constraintVertical_bias="0.395" />
+
+    <ToggleButton
+        android:id="@+id/AutoFire"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="ToggleButton"
+        android:textOff="Auto Fire OFF"
+        android:textOn="Auto Fire ON"
+        tools:layout_editor_absoluteX="292dp"
+        tools:layout_editor_absoluteY="628dp" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>

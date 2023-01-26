@@ -10,6 +10,9 @@
         android:theme="@style/Theme.WifiController">
         <activity
             android:name=".ControllerActivity"
+            android:exported="true" />
+        <activity
+            android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

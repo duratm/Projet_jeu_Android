@@ -10,7 +10,7 @@ import java.net.Socket;
 public class GameMessageManager {
     private static Socket soc = null;
     private static int portConnect = 6969;
-    private static String servAddr = String.valueOf("192.168.1.98");
+    private static String servAddr = String.valueOf("192.168.1.254");
     private static DataOutputStream out;
     private static DataInputStream in;
     private static boolean log = false;
