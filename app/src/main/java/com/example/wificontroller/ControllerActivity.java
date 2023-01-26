@@ -30,7 +30,7 @@ public class ControllerActivity extends AppCompatActivity {
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                GameMessageManager.sendMessage("NAME=Mathias#COL=30945#MSG=Salut#ORIENT#GunTrav=1");
+                GameMessageManager.sendMessage("NAME=Mathias#COL=30945#MSG=Salut#ORIENT");
                 Log.i("kikoo", String.valueOf(GameMessageManager.getNextMessage()));
 
             }
@@ -38,7 +38,47 @@ public class ControllerActivity extends AppCompatActivity {
         toggleAutoFire();
         actionFire();
         createJoystick();
+        setUpEmotes();
 
+    }
+
+    private void setUpEmotes() {
+        Button button = findViewById(R.id.bottomEmoteButton);
+        Button finalButton = button;
+        button.setOnClickListener(v -> {
+            new Thread(new Runnable() {
+                public void run() {
+                    GameMessageManager.sendMessage("MSG="+finalButton.getText().toString());
+                }
+            }).start();
+        });
+        button = findViewById(R.id.topEmoteButton);
+        Button finalButton1 = button;
+        button.setOnClickListener(v -> {
+            new Thread(new Runnable() {
+                public void run() {
+                    GameMessageManager.sendMessage("MSG="+ finalButton1.getText().toString());
+                }
+            }).start();
+        });
+        button = findViewById(R.id.rightEmoteButton);
+        Button finalButton2 = button;
+        button.setOnClickListener(v -> {
+            new Thread(new Runnable() {
+                public void run() {
+                    GameMessageManager.sendMessage("MSG="+ finalButton2.getText().toString());
+                }
+            }).start();
+        });
+        button = findViewById(R.id.leftEmoteButton);
+        Button finalButton3 = button;
+        button.setOnClickListener(v -> {
+            new Thread(new Runnable() {
+                public void run() {
+                    GameMessageManager.sendMessage("MSG="+ finalButton3.getText().toString());
+                }
+            }).start();
+        });
     }
 
     private void toggleAutoFire() {
@@ -69,23 +109,9 @@ public class ControllerActivity extends AppCompatActivity {
             f.setMaximumFractionDigits(1);
             double Vg1 = (double) Vg/getsVMax()+0.5;
             double Vd1 = (double) Vd/getsVMax()+0.5;
-
-            if (Vg1 < 0.5 && Vd1 < 0) {
-                Vg1 = -Vg1;
-                Vd1 = -Vd1;
-            } else if (Vg1 < 0 || Vd1 < 0) {
-                Vg1 = Vd1<0 ? -Vd1:Vd1;
-                Vd1 = (double) Vg/getsVMax()+0.5<0 ? -(double) Vg/getsVMax()+0.5:(double) Vg/getsVMax()+0.5;
-            }
-
-
-            Log.i("kikoo", "MotL=" + f.format(Vg)+"#MotR=" + f.format(Vd));
-            Log.i("kikoo",(double) Vg/getsVMax()+0.5+"-"+((double) Vd/getsVMax()+0.5));
-            double finalVg = Vg1;
-            double finalVd = Vd1;
             new Thread(new Runnable() {
                 public void run() {
-                    GameMessageManager.sendMessage("MotL=" + f.format(finalVg)+"#MotR=" + f.format(finalVd));
+                    GameMessageManager.sendMessage("MotL=" + f.format(Vg1)+"#MotR=" + f.format(Vd1));
                 }
             }).start();
         };

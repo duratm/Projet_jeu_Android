@@ -6,4 +6,9 @@
     <string name="empty"></string>
     <string name="Fire">Fire</string>
     <string name="menuText">back to menu</string>
+    <string name="Emotes">Emotes</string>
+    <string name="emoteSheh">SHEH !!!</string>
+    <string name="emoteSmile">(^O^)</string>
+    <string name="emoteBored">-_-</string>
+    <string name="emoteWhat">(^_-)</string>
 </resources>

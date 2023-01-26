@@ -29,7 +29,7 @@
         app:layout_constraintHorizontal_bias="0.483"
         app:layout_constraintStart_toEndOf="@+id/frame"
         app:layout_constraintTop_toTopOf="@+id/frame"
-        app:layout_constraintVertical_bias="0.395" />
+        app:layout_constraintVertical_bias="0.657" />
 
     <ToggleButton
         android:id="@+id/AutoFire"
@@ -38,7 +38,68 @@
         android:text="ToggleButton"
         android:textOff="Auto Fire OFF"
         android:textOn="Auto Fire ON"
-        tools:layout_editor_absoluteX="292dp"
-        tools:layout_editor_absoluteY="628dp" />
+        app:layout_constraintBottom_toTopOf="@+id/frame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.054"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.039" />
+
+    <Button
+        android:id="@+id/leftEmoteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/emoteWhat"
+        app:layout_constraintBottom_toBottomOf="@+id/centerEmoteButton"
+        app:layout_constraintEnd_toStartOf="@+id/centerEmoteButton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topEmoteButton" />
+
+    <Button
+        android:id="@+id/rightEmoteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/emoteSmile"
+        app:layout_constraintBottom_toBottomOf="@+id/centerEmoteButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/centerEmoteButton"
+        app:layout_constraintTop_toTopOf="@+id/centerEmoteButton" />
+
+    <Button
+        android:id="@+id/bottomEmoteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/emoteBored"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/centerEmoteButton"
+        app:layout_constraintStart_toStartOf="@+id/centerEmoteButton"
+        app:layout_constraintTop_toBottomOf="@+id/AutoFire"
+        app:layout_constraintVertical_bias="0.29" />
+
+    <Button
+        android:id="@+id/topEmoteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:text="@string/emoteSheh"
+        app:layout_constraintBottom_toTopOf="@+id/centerEmoteButton"
+        app:layout_constraintEnd_toStartOf="@+id/rightEmoteButton"
+        app:layout_constraintStart_toEndOf="@+id/leftEmoteButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/centerEmoteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="@string/Emotes"
+        app:layout_constraintBottom_toTopOf="@+id/bottomEmoteButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.671"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
