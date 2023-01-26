@@ -11,4 +11,6 @@
     <string name="emoteSmile">(^O^)</string>
     <string name="emoteBored">-_-</string>
     <string name="emoteWhat">(^_-)</string>
+    <string name="colorPicker">Pick a color</string>
+    <string name="NameInput">Enter your pseudo</string>
 </resources>
