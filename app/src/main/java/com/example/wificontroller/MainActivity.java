@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void control(View view) {
-        Intent intent = new Intent(this, ControllerActivity.class);
+        Intent intent = new Intent(this, FirstController.class);
         startActivity(intent);
     }
 }
