@@ -1,10 +1,7 @@
 package com.example.wificontroller;
 
 import android.annotation.SuppressLint;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
-import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -23,15 +20,15 @@ public class ControllerActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_controller);
+
         new Thread(new Runnable() {
             public void run() {
-                try {
-                    sleep(1000);
-                } catch (InterruptedException e) {
-                    throw new RuntimeException(e);
+                Log.i("kikoo", getIntent().getStringExtra(MainActivity.NAME));
+                if (!getIntent().getStringExtra(MainActivity.NAME).equals("")) {
+                    GameMessageManager.sendMessage("NAME=" + getIntent().getStringExtra(MainActivity.NAME) + "#COL=" + getIntent().getStringExtra(MainActivity.COLOR) + "#MSG=Salut");
+                } else {
+                    GameMessageManager.sendMessage("COL=" + getIntent().getStringExtra(MainActivity.COLOR) + "#MSG=Salut");
                 }
-                GameMessageManager.sendMessage("NAME=Mathias#COL="+getIntent().getStringExtra(MainActivity.COLOR)+"#MSG=Salut#ORIENT");
-                Log.i("kikoo", "NAME=Mathias#COL="+getIntent().getStringExtra(MainActivity.COLOR)+"#MSG=Salut#ORIENT");
 
             }
         }).start();
