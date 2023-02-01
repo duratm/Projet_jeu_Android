@@ -10,6 +10,7 @@ import android.widget.ToggleButton;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.text.DecimalFormat;
+import java.util.Locale;
 
 import static com.example.wificontroller.JoystickView.getsVMax;
 import static java.lang.Thread.sleep;
@@ -36,7 +37,30 @@ public class ControllerActivity extends AppCompatActivity {
         actionFire();
         createJoystick();
         setUpEmotes();
+        toggleHide();
 
+    }
+
+    private void toggleHide() {
+        ToggleButton toggleButton = (ToggleButton) findViewById(R.id.Hide);
+
+        toggleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new Thread(new Runnable() {
+                    public void run() {
+                        boolean checked = ((ToggleButton) v).isChecked();
+                        if (checked){
+                            GameMessageManager.sendMessage("COL=-16777216");
+                        }
+                        else{
+                            GameMessageManager.sendMessage("COL=" + getIntent().getStringExtra(MainActivity.COLOR));
+                        }
+                    }
+                }).start();
+
+            }
+        });
     }
 
     private void setUpEmotes() {
@@ -78,6 +102,8 @@ public class ControllerActivity extends AppCompatActivity {
         });
     }
 
+
+
     private void toggleAutoFire() {
         ToggleButton toggleButton = (ToggleButton) findViewById(R.id.AutoFire);
 
@@ -102,13 +128,11 @@ public class ControllerActivity extends AppCompatActivity {
 
     private void createJoystick() {
         JoystickView.ValueChangedHandler value = (Vg, Vd) -> {
-            DecimalFormat f = new DecimalFormat();
-            f.setMaximumFractionDigits(1);
-            double Vg1 = (double) Vg/getsVMax()+0.5;
-            double Vd1 = (double) Vd/getsVMax()+0.5;
+            double Vg1 = ((double) Vg/getsVMax())+0.5;
+            double Vd1 = ((double) Vd/getsVMax())+0.5;
             new Thread(new Runnable() {
                 public void run() {
-                    GameMessageManager.sendMessage("MotL=" + f.format(Vg1)+"#MotR=" + f.format(Vd1));
+                    GameMessageManager.sendMessage("MotL=" + String.format(Locale.ENGLISH, "%.4f", Vg1)+"#MotR=" + String.format(Locale.ENGLISH, "%.4f", Vd1));
                 }
             }).start();
         };
