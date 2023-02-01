@@ -21,13 +21,37 @@ public class FirstController extends AppCompatActivity {
         Button droite = findViewById(R.id.droite);
         Button gauche = findViewById(R.id.gauche);
         GameMessageManager.connect();
+
+        Button tir = findViewById(R.id.tir);
+
+        tir.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                if (motionEvent.getAction() == MotionEvent.ACTION_DOWN){
+                    new Thread(new Runnable() {
+                        public void run() {
+                            GameMessageManager.sendMessage("GunTrig=1");
+                        }
+                    }).start();
+                }
+                else if (motionEvent.getAction() == MotionEvent.ACTION_UP){
+                    new Thread(new Runnable() {
+                        public void run() {
+                            GameMessageManager.sendMessage("GunTrig=0");
+                        }
+                    }).start();
+                }
+                return true;
+            }
+        });
         avancer.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     new Thread(new Runnable() {
                         public void run() {
-                            GameMessageManager.sendMessage("MotR=0.75#MotL=0.75");
+                            GameMessageManager.sendMessage("MotR=0.75#MotL=0.75#ORIENT");
+                            Log.i("oriant", "" + GameMessageManager.getNextMessage());
                         }
                     }).start();
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
@@ -51,14 +75,12 @@ public class FirstController extends AppCompatActivity {
                             GameMessageManager.sendMessage("MotR=0.75#MotL=0.25");
                         }
                     }).start();
-                    Log.i("appui", "il vient  d'appuyer a droite");
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     new Thread(new Runnable() {
                         public void run() {
                             GameMessageManager.sendMessage("MotR=0.5#MotL=0.5");
                         }
                     }).start();
-                    Log.i("relache", "il vient  de relacher a droite");
                 }
                 return true;
             }
