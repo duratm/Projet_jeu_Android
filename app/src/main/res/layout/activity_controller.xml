@@ -7,6 +7,20 @@
     tools:context=".ControllerActivity">
 
     <ToggleButton
+        android:id="@+id/guntrav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hide"
+        android:textOff="@string/HideOFF"
+        android:textOn="@string/HideON"
+        app:layout_constraintBottom_toTopOf="@+id/frame"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.039" />
+
+    <ToggleButton
         android:id="@+id/Hide"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -15,7 +29,7 @@
         android:textOn="@string/HideON"
         app:layout_constraintBottom_toTopOf="@+id/frame"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.532"
+        app:layout_constraintHorizontal_bias="0.845"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.039" />
