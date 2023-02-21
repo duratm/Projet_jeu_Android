@@ -14,6 +14,7 @@ import android.view.View;
 import android.widget.Button;
 
 import java.text.Normalizer;
+import java.util.Objects;
 
 public class FirstController extends AppCompatActivity {
 
@@ -30,7 +31,8 @@ public class FirstController extends AppCompatActivity {
         GameMessageManager.connect();
 
         Button tir = findViewById(R.id.tir);
-
+        Log.i("passage thread", "oui");
+        new Thread(new ProducteurPosition()).start();
         tir.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View view, MotionEvent motionEvent) {
@@ -58,28 +60,35 @@ public class FirstController extends AppCompatActivity {
                     new Thread(new Runnable() {
                         @SuppressLint("ResourceType")
                         public void run() {
-                            GameMessageManager.sendMessage("MotR=0.75#MotL=0.75#ORIENT");
-                            Button[] buttons = changeDirection(GameMessageManager.getNextMessage());
-                            Log.i("reviens", ""+buttons[0].getId());
-                            if (buttons[0] != null || buttons[1] != null || buttons[2] != null || buttons[3] != null) {
-                                avancer.setId(buttons[0].getId());
-                                gauche.setId(buttons[1].getId());
-                                droite.setId(buttons[2].getId());
-                                reculer.setId(buttons[3].getId());
+                            Positions positions = new Positions();
+                            Float orient;
+                            try {
+                                orient = positions.recupere();
+                            } catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+
+                            int dir = changeDirection(orient);
+
+//                            Log.i("direction", String.valueOf(dir));
+                            if (dir == 0){
+                                GameMessageManager.sendMessage("MotR=0.75#MotL=0.75");
+                            }
+                            if (dir == 1){
+                                GameMessageManager.sendMessage("MotL=0.75#MotR=0.25");
+                            }
+                            if (dir==2){
+                                GameMessageManager.sendMessage("MotR=0.75#MotL=0.25");
+                            }
+                            if (dir==3){
+                                GameMessageManager.sendMessage("MotR=0.25#MotL=0.25");
                             }
                         }
                     }).start();
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     new Thread(new Runnable() {
                         public void run() {
-                            GameMessageManager.sendMessage("MotR=0.5#MotL=0.5#ORIENT");
-                            Button[] buttons = changeDirection(GameMessageManager.getNextMessage());
-                            if (buttons[0] != null || buttons[1] != null || buttons[2] != null || buttons[3] != null) {
-                                avancer.setId(buttons[0].getId());
-                                gauche.setId(buttons[1].getId());
-                                droite.setId(buttons[2].getId());
-                                reculer.setId(buttons[3].getId());
-                            }
+                            GameMessageManager.sendMessage("MotR=0.5#MotL=0.5");
                         }
                     }).start();
                 }
@@ -94,27 +103,39 @@ public class FirstController extends AppCompatActivity {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     new Thread(new Runnable() {
                         public void run() {
-                            GameMessageManager.sendMessage("MotR=0.75#MotL=0.25#ORIENT");
-                            Button[] buttons = changeDirection(GameMessageManager.getNextMessage());
-                            if (buttons[0] != null || buttons[1] != null || buttons[2] != null || buttons[3] != null) {
-                                avancer.setId(buttons[0].getId());
-                                gauche.setId(buttons[1].getId());
-                                droite.setId(buttons[2].getId());
-                                reculer.setId(buttons[3].getId());
+                            Positions positions = new Positions();
+                            Float orient;
+                            try {
+                                orient = positions.recupere();
+                            } catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+
+                            int dir = changeDirection(orient);
+                            try {
+                                Thread.sleep(1000);
+                            } catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+//                            Log.i("direction", String.valueOf(dir));
+                            if (dir == 0){
+                                GameMessageManager.sendMessage("MotR=0.75#MotL=0.75");
+                            }
+                            if (dir == 1){
+                                GameMessageManager.sendMessage("MotL=0.75#MotR=0.25");
+                            }
+                            if (dir==2){
+                                GameMessageManager.sendMessage("MotR=0.75#MotL=0.25");
+                            }
+                            if (dir==3){
+                                GameMessageManager.sendMessage("MotR=0.25#MotL=0.25");
                             }
                         }
                     }).start();
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     new Thread(new Runnable() {
                         public void run() {
-                            GameMessageManager.sendMessage("MotR=0.5#MotL=0.5#ORIENT");
-                            Button[] buttons = changeDirection(GameMessageManager.getNextMessage());
-                            if (buttons[0] != null || buttons[1] != null || buttons[2] != null || buttons[3] != null) {
-                                avancer.setId(buttons[0].getId());
-                                gauche.setId(buttons[1].getId());
-                                droite.setId(buttons[2].getId());
-                                reculer.setId(buttons[3].getId());
-                            }
+                            GameMessageManager.sendMessage("MotR=0.5#MotL=0.5");
                         }
                     }).start();
                 }
@@ -128,77 +149,63 @@ public class FirstController extends AppCompatActivity {
                 if (event.getAction() == MotionEvent.ACTION_DOWN) {
                     new Thread(new Runnable() {
                         public void run() {
-                            GameMessageManager.sendMessage("MotL=0.75#MotR=0.25#ORIENT");
-                            Button[] buttons = changeDirection(GameMessageManager.getNextMessage());
-                            if (buttons[0] != null || buttons[1] != null || buttons[2] != null || buttons[3] != null) {
-                                avancer.setId(buttons[0].getId());
-                                gauche.setId(buttons[1].getId());
-                                droite.setId(buttons[2].getId());
-                                reculer.setId(buttons[3].getId());
+                            Positions positions = new Positions();
+                            Float orient;
+                            try {
+                                orient = positions.recupere();
+                            } catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+
+                            int dir = changeDirection(orient);
+//                            Log.i("direction", String.valueOf(dir));
+                            if (dir == 0) {
+                                GameMessageManager.sendMessage("MotR=0.75#MotL=0.75");
+                            }
+                            if (dir == 1) {
+                                GameMessageManager.sendMessage("MotL=0.75#MotR=0.25");
+                            }
+                            if (dir == 2) {
+                                GameMessageManager.sendMessage("MotR=0.75#MotL=0.25");
+                            }
+                            if (dir == 3) {
+                                GameMessageManager.sendMessage("MotR=0.25#MotL=0.25");
                             }
                         }
                     }).start();
                 } else if (event.getAction() == MotionEvent.ACTION_UP) {
                     new Thread(new Runnable() {
                         public void run() {
-                            GameMessageManager.sendMessage("MotR=0.5#MotL=0.5#ORIENT");
-                            Button[] buttons = changeDirection(GameMessageManager.getNextMessage());
-                            if (buttons[0] != null || buttons[1] != null || buttons[2] != null || buttons[3] != null) {
-                                assert buttons[0] != null;
-                                avancer.setId(buttons[0].getId());
-                                gauche.setId(buttons[1].getId());
-                                droite.setId(buttons[2].getId());
-                                reculer.setId(buttons[3].getId());
-                            }
+                            GameMessageManager.sendMessage("MotR=0.5#MotL=0.5");
                         }
                     }).start();
                 }
                 return true;
             }
         });
+
     }
 
 
     @SuppressLint("CutPasteId")
-    private Button[] changeDirection(String nextMessage) {
-        Button[] buttons = new Button[4];
-        Button avancer = null;
-        Button gauche = null;
-        Button droite = null;
-        Button reculer = null;
-        if (!nextMessage.isEmpty()){
-            Log.i("passage", "passage dans changeDirection");
-            float nextMessageInt = parseFloat(nextMessage);
+    private int changeDirection(Float nextMessage) {
+//        Log.i("nextMessage", String.valueOf(nextMessage));
+        if (nextMessage != null){
+            float nextMessageInt = nextMessage;
 
             if (nextMessageInt > 0.125 && nextMessageInt < 0.375){
-                avancer = findViewById(R.id.avancer);
-                gauche = findViewById(R.id.gauche);
-                droite = findViewById(R.id.droite);
-                reculer = findViewById(R.id.reculer);
+                return 0;
             }
             if (nextMessageInt > 0.375 && nextMessageInt < 0.875){
-                avancer = findViewById(R.id.gauche);
-                gauche = findViewById(R.id.reculer);
-                droite = findViewById(R.id.avancer);
-                reculer = findViewById(R.id.droite);
+                return 1;
             }
             if (nextMessageInt > 0.125 && nextMessageInt < 0.625){
-                avancer = findViewById(R.id.droite);
-                gauche = findViewById(R.id.avancer);
-                droite = findViewById(R.id.reculer);
-                reculer = findViewById(R.id.gauche);
+                return 2;
             }
             if (nextMessageInt > 0.625 && nextMessageInt < 0.875) {
-                avancer = findViewById(R.id.reculer);
-                gauche = findViewById(R.id.gauche);
-                droite = findViewById(R.id.droite);
-                reculer = findViewById(R.id.avancer);
+                return 3;
             }
-            buttons[0] = avancer;
-            buttons[1] = gauche;
-            buttons[2] = droite;
-            buttons[3] = reculer;
         }
-        return buttons;
+        return -1;
     }
 }
