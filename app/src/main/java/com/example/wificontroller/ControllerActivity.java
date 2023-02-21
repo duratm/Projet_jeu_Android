@@ -31,7 +31,7 @@ public class ControllerActivity extends AppCompatActivity {
                     throw new RuntimeException(e);
                 }
                 GameMessageManager.sendMessage("NAME=Mathias#COL=30945#MSG=Salut#ORIENT#GunTrav=1");
-                Log.i("kikoo", String.valueOf(GameMessageManager.getNextMessage()));
+                //Log.i("kikoo", String.valueOf(GameMessageManager.getNextMessage()));
 
             }
         }).start();
@@ -79,8 +79,8 @@ public class ControllerActivity extends AppCompatActivity {
             }
 
 
-            Log.i("kikoo", "MotL=" + f.format(Vg)+"#MotR=" + f.format(Vd));
-            Log.i("kikoo",(double) Vg/getsVMax()+0.5+"-"+((double) Vd/getsVMax()+0.5));
+            //Log.i("kikoo", "MotL=" + f.format(Vg)+"#MotR=" + f.format(Vd));
+            //Log.i("kikoo",(double) Vg/getsVMax()+0.5+"-"+((double) Vd/getsVMax()+0.5));
             double finalVg = Vg1;
             double finalVd = Vd1;
             new Thread(new Runnable() {
@@ -89,7 +89,7 @@ public class ControllerActivity extends AppCompatActivity {
                 }
             }).start();
         };
-        Log.i("kikoo", String.valueOf(GameMessageManager.isConnected()));
+        //Log.i("kikoo", String.valueOf(GameMessageManager.isConnected()));
         FrameLayout frame = findViewById(R.id.frame);
         JoystickView joystick =  new JoystickView(this,value);
         joystick.setJoystickRadius(300);
@@ -110,7 +110,7 @@ public class ControllerActivity extends AppCompatActivity {
                         throw new RuntimeException(e);
                     }
                     GameMessageManager.sendMessage("GunTrav=0#ORIENT");
-                    Log.i("kikoo", String.valueOf(GameMessageManager.getNextMessage()));
+                    //Log.i("kikoo", String.valueOf(GameMessageManager.getNextMessage()));
                 }
             }).start();
         });
