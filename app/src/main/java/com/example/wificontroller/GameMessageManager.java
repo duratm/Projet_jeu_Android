@@ -2,17 +2,20 @@ package com.example.wificontroller;
 
 import android.util.Log;
 
+import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.net.Socket;
 
 public class GameMessageManager {
     private static Socket soc = null;
     private static int portConnect = 6969;
-    private static String servAddr = String.valueOf("192.168.1.254");
-    private static DataOutputStream out;
-    private static DataInputStream in;
+    private static String servAddr = String.valueOf("192.168.1.98");
+    private static PrintWriter out;
+    private static BufferedReader in;
     private static boolean log = false;
 
     public static void connect(String address)
@@ -35,9 +38,10 @@ public class GameMessageManager {
                     soc = new Socket(servAddr, portConnect);
                     if (soc != null)
                     {
-                        out = new DataOutputStream(soc.getOutputStream());
-                        in = new DataInputStream(soc.getInputStream());
+                        out = new PrintWriter(soc.getOutputStream());
+                        in = new BufferedReader(new InputStreamReader(soc.getInputStream()));
                     }
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
@@ -46,7 +50,7 @@ public class GameMessageManager {
 
     public static boolean isConnected()
     {
-        if(soc != null)
+        if(soc != null && !soc.isClosed())
             return true;
         return false;
     }
@@ -58,9 +62,10 @@ public class GameMessageManager {
             try {
                 if(log)
                     Log.i("GameMessManager", "sending : " + msg);
-                out.writeUTF(msg);
+                out.println(msg);
+                out.flush();
                 return true;
-            } catch (IOException e) {
+            } catch (Exception e) {
                 if(log)
                     Log.i("GameMessManager",
                             "attempted sendMessage got exception : "
@@ -82,7 +87,7 @@ public class GameMessageManager {
         {
             try {
                 String msg = null;
-                msg = in.readUTF();
+                msg = in.readLine();
                 if(log)
                     Log.i("GameMessManager", "received : " + msg);
                 return msg;
