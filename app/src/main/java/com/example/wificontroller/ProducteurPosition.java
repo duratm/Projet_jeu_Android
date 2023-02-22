@@ -12,8 +12,6 @@ public class ProducteurPosition implements Runnable {
             Log.i("passage prod", "oui");
 
             GameMessageManager.sendMessage("ORIENT");
-            GameMessageManager.sendMessage("ORIENT");
-            GameMessageManager.sendMessage("ORIENT");
 
             Log.i("send message", "oui");
             try {

@@ -86,10 +86,11 @@ public class GameMessageManager {
         if(isConnected())
         {
             try {
-                String msg = null;
-                if(log)
-                    Log.i("GameMessManager", "call receive");
-                msg = in.readLine();
+//                String msg = null;
+//                msg = in.readLine();
+                char[] mess = new char[128];
+                in.read(mess, 0, 127);
+                String msg = new String(mess);
                 if(log)
                     Log.i("GameMessManager", "received : " + msg);
                 return msg;

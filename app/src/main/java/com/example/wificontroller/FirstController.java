@@ -32,6 +32,14 @@ public class FirstController extends AppCompatActivity {
 
         Button tir = findViewById(R.id.tir);
         Log.i("passage thread", "oui");
+
+        while (!GameMessageManager.isConnected()){
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
         new Thread(new ProducteurPosition()).start();
         tir.setOnTouchListener(new View.OnTouchListener() {
             @Override
