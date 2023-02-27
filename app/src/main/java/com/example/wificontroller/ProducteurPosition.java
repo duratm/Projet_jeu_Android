@@ -19,10 +19,16 @@ public class ProducteurPosition implements Runnable {
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }
-            Log.i("der ori", "oui");
+            //Log.i("der ori", "oui");
             // toutes les secondes un boulanger produit un pain
+            if (GameMessageManager.isConnected()){
+                Log.i("Connected", "oui");
+            }
+            else {
+                Log.i("Connected", "oui");
+            }
             String orient = GameMessageManager.getNextMessage();
-            Log.i("der ori 2", "oui");
+            //Log.i("der ori 2", "oui");
             if (orient != null) {
                 Log.i("orient != null", "oui");
                 try {

@@ -10,13 +10,13 @@ public class Positions {
 
     private BlockingQueue<Float> queue =  new ArrayBlockingQueue<Float>(4) ;
 
-    public void depose(Float position) throws InterruptedException {
+    public synchronized void depose(Float position) throws InterruptedException {
         Log.i("depose", String.valueOf(position));
         //queue.offer(position,  200, TimeUnit.MILLISECONDS);
         queue.put(position);
     }
 
-    public Float recupere() throws InterruptedException {
+    public synchronized Float recupere() throws InterruptedException {
         //String pos = String.valueOf(this.queue.poll(1000, TimeUnit.MILLISECONDS));
         String pos = String.valueOf(this.queue.take());
         //Log.i("der pos", pos);
