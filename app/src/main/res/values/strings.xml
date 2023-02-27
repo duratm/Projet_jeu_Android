@@ -10,6 +10,4 @@
     <string name="reculer">Reculer</string>
     <string name="droite">Droite</string>
     <string name="gauche">Gauche</string>
-    <string name="tir">Button</string>
-    <string name="shoot">shoot</string>
 </resources>
