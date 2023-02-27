@@ -12,4 +12,5 @@
     <string name="gauche">Gauche</string>
     <string name="tir">Button</string>
     <string name="shoot">shoot</string>
+    <string name="spinner">Spinner</string>
 </resources>
