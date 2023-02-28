@@ -11,6 +11,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import com.pes.androidmaterialcolorpickerdialog.ColorPickerCallback;
 
+import static java.lang.Thread.sleep;
+
 public class MainActivity extends AppCompatActivity {
 
     public final static String COLOR = "com.example.wificontroller.COLOR";
@@ -20,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initializeColorPicker();
 
         final Button button = findViewById(R.id.connect);
         button.setOnClickListener(
@@ -29,15 +32,9 @@ public class MainActivity extends AppCompatActivity {
                         String adressServer = textFromInput.getText().toString();
                         GameMessageManager.logActivity(true);
                         GameMessageManager.connect(adressServer);
-                        control(v);
-                        //GameMessageManager.sendMessage("MOTL=0.5");
+                        control();
                     }
-                        /*else {
-                            TextView errorText = findViewById(R.id.error);
-                            errorText.setText("Une erreur est apparue lors de la connexion au serveur");
-                        }*/
                 });
-        initializeColorPicker();
     }
 
     private void initializeColorPicker() {
@@ -51,7 +48,6 @@ public class MainActivity extends AppCompatActivity {
                         cp.setCallback(new ColorPickerCallback() {
                             @Override
                             public void onColorChosen(int colour) {
-
                                 Log.i("color", String.valueOf(cp.getColor()));
                                 color = cp.getColor();
                             }
@@ -60,13 +56,40 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    public void control(View view) {
-        if (GameMessageManager.isConnected()) {
-            Intent intent = new Intent(this, ControllerActivity.class);
-            TextView name = findViewById(R.id.name);
-            intent.putExtra(NAME, name.getText().toString());
-            intent.putExtra(COLOR, String.valueOf(color));
-            startActivity(intent);
-        }
+    public void control() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (!GameMessageManager.isConnected()) {
+                    Log.i("cbot", "Waiting for connection");
+                    try {
+                        sleep(5);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i("cbot","launchng");
+                        game();
+                    }
+                });
+            }
+        }).start();
+    }
+
+    public void game() {
+        Intent intent = new Intent(this, ControllerActivity.class);
+        TextView name = findViewById(R.id.name);
+        intent.putExtra(NAME, name.getText().toString());
+        intent.putExtra(COLOR, String.valueOf(color));
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                GameMessageManager.sendMessage("NAME=" + name.getText().toString() + "#COL=" + color + "#MSG=Salut");
+            }
+        }).start();
+        startActivity(intent);
     }
 }
