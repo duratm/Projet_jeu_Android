@@ -27,6 +27,7 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Objects;
+import static java.lang.Thread.sleep;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -37,6 +38,7 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        initializeColorPicker();
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         final Button button = findViewById(R.id.connect);
@@ -75,15 +77,10 @@ public class MainActivity extends AppCompatActivity {
                         GameMessageManager.logActivity(true);
                         GameMessageManager.connect(adressServer);
                         ecrireFichier(adressServer);
-                        control(v);
+                        control();
                         //GameMessageManager.sendMessage("MOTL=0.5");
                     }
-                        /*else {
-                            TextView errorText = findViewById(R.id.error);
-                            errorText.setText("Une erreur est apparue lors de la connexion au serveur");
-                        }*/
                 });
-        initializeColorPicker();
     }
 
     private void initializeColorPicker() {
@@ -106,14 +103,41 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    public void control(View view) {
-        if (GameMessageManager.isConnected()) {
-            Intent intent = new Intent(this, ControllerActivity.class);
-            TextView name = findViewById(R.id.name);
-            intent.putExtra(NAME, name.getText().toString());
-            intent.putExtra(COLOR, String.valueOf(color));
-            startActivity(intent);
-        }
+    public void control() {
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                while (!GameMessageManager.isConnected()) {
+                    Log.i("cbot", "Waiting for connection");
+                    try {
+                        sleep(5);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                }
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Log.i("cbot","launchng");
+                        game();
+                    }
+                });
+            }
+        }).start();
+    }
+
+    public void game() {
+        Intent intent = new Intent(this, ControllerActivity.class);
+        TextView name = findViewById(R.id.name);
+        intent.putExtra(NAME, name.getText().toString());
+        intent.putExtra(COLOR, String.valueOf(color));
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
+                GameMessageManager.sendMessage("NAME=" + name.getText().toString() + "#COL=" + color + "#MSG=Salut");
+            }
+        }).start();
+        startActivity(intent);
     }
 
     public ArrayList<String> lireFichier(){

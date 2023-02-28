@@ -7,30 +7,31 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ToggleButton;
-import androidx.appcompat.app.AppCompatActivity;
 
-import java.text.DecimalFormat;
 import java.util.Locale;
+import java.util.Objects;
 
 import static com.example.wificontroller.JoystickView.getsVMax;
 import static java.lang.Thread.sleep;
 
+import androidx.appcompat.app.AppCompatActivity;
+
 public class ControllerActivity extends AppCompatActivity {
 
+    private final AutoAimRunnable directionToShoot = new AutoAimRunnable();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_controller);
 
-        new Thread(new Runnable() {
-            public void run() {
-                Log.i("kikoo", getIntent().getStringExtra(MainActivity.NAME));
-                if (!getIntent().getStringExtra(MainActivity.NAME).equals("")) {
-                    GameMessageManager.sendMessage("NAME=" + getIntent().getStringExtra(MainActivity.NAME) + "#COL=" + getIntent().getStringExtra(MainActivity.COLOR) + "#MSG=Salut");
-                } else {
-                    GameMessageManager.sendMessage("COL=" + getIntent().getStringExtra(MainActivity.COLOR) + "#MSG=Salut");
-                }
+        new Thread(directionToShoot).start();
 
+        new Thread(() -> {
+            if (!getIntent().getStringExtra(MainActivity.NAME).equals("")) {
+                GameMessageManager.sendMessage("NAME=" + getIntent().getStringExtra(MainActivity.NAME) + "#COL=" + getIntent().getStringExtra(MainActivity.COLOR) + "#MSG=Salut");
+                Log.i("kikoo", getIntent().getStringExtra(MainActivity.NAME));
+            } else {
+                GameMessageManager.sendMessage("COL=" + getIntent().getStringExtra(MainActivity.COLOR) + "#MSG=Salut");
             }
         }).start();
         toggleAutoFire();
@@ -38,8 +39,37 @@ public class ControllerActivity extends AppCompatActivity {
         createJoystick();
         setUpEmotes();
         toggleHide();
-
+        toggleTrav();
     }
+
+    private void toggleTrav() {
+        ToggleButton toggleButton = findViewById(R.id.guntrav);
+        toggleButton.setChecked(true);
+        toggleButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                boolean checked = ((ToggleButton) v).isChecked();
+                if (checked){
+                    directionToShoot.setRunning(true);
+                }
+                else{
+                    directionToShoot.setRunning(false);
+                    new Thread(new Runnable() {
+                        @Override
+                        public void run() {
+                            try {
+                                sleep(50);
+                            } catch (InterruptedException e) {
+                                throw new RuntimeException(e);
+                            }
+                            GameMessageManager.sendMessage("GunTrav=0.5");
+                        }
+                    }).start();
+                }
+            }
+        });
+    }
+
 
     private void toggleHide() {
         ToggleButton toggleButton = (ToggleButton) findViewById(R.id.Hide);
@@ -114,10 +144,10 @@ public class ControllerActivity extends AppCompatActivity {
                     public void run() {
                         boolean checked = ((ToggleButton) v).isChecked();
                         if (checked){
-                            GameMessageManager.sendMessage("GunTrav=1");
+                            GameMessageManager.sendMessage("GunTrig=1");
                         }
                         else{
-                            GameMessageManager.sendMessage("GunTrav=0");
+                            GameMessageManager.sendMessage("GunTrig=0");
                         }
                     }
                 }).start();
@@ -132,7 +162,8 @@ public class ControllerActivity extends AppCompatActivity {
             double Vd1 = ((double) Vd/getsVMax())+0.5;
             new Thread(new Runnable() {
                 public void run() {
-                    GameMessageManager.sendMessage("MotL=" + String.format(Locale.ENGLISH, "%.4f", Vg1)+"#MotR=" + String.format(Locale.ENGLISH, "%.4f", Vd1));
+                    Log.i("kikoo", Vg1+"#MotR=" + Vd1);
+                    GameMessageManager.sendMessage("MotL=" + Vg1+"#MotR=" + Vd1);
                 }
             }).start();
         };
@@ -150,13 +181,13 @@ public class ControllerActivity extends AppCompatActivity {
             toggleButton.setChecked(false);
             new Thread(new Runnable() {
                 public void run() {
-                    GameMessageManager.sendMessage("GunTrav=1");
+                    GameMessageManager.sendMessage("GunTrig=1");
                     try {
                         sleep(10);
                     } catch (InterruptedException e) {
                         throw new RuntimeException(e);
                     }
-                    GameMessageManager.sendMessage("GunTrav=0#ORIENT");
+                    GameMessageManager.sendMessage("GunTrig=0#Guntrav=0.5");
                     Log.i("kikoo", String.valueOf(GameMessageManager.getNextMessage()));
                 }
             }).start();
@@ -164,7 +195,18 @@ public class ControllerActivity extends AppCompatActivity {
     }
 
     @Override
+    protected void onDestroy() {
+        new Thread(new Runnable() {
+            public void run() {
+                GameMessageManager.sendMessage("EXIT");
+            }
+        }).start();
+        super.onDestroy();
+    }
+
+    @Override
     public void onBackPressed() {
+
         new Thread(new Runnable() {
             public void run() {
                 GameMessageManager.sendMessage("EXIT");

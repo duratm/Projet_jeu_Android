@@ -23,4 +23,6 @@
     <string name="HideON">Hide ON</string>
     <string name="HideOFF">Hide OFF</string>
     <string name="hide">hide</string>
+    <string name="TravOn">Auto Aim ON</string>
+    <string name="TravOFF">Auto Aim OFF</string>
 </resources>
