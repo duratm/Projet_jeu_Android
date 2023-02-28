@@ -3,9 +3,16 @@
     <string name="join">Join Server</string>
     <string name="enter">Server Adress</string>
     <string name="connection">Connection to Game</string>
-    <string name="empty"></string>
+    <string name="empty" />
     <string name="Fire">Fire</string>
     <string name="menuText">back to menu</string>
+    <string name="avancer">Avancer</string>
+    <string name="reculer">Reculer</string>
+    <string name="droite">Droite</string>
+    <string name="gauche">Gauche</string>
+    <string name="tir">Button</string>
+    <string name="shoot">shoot</string>
+    <string name="spinner">Spinner</string>
     <string name="Emotes">Emotes</string>
     <string name="emoteSheh">SHEH !!!</string>
     <string name="emoteSmile">(^O^)</string>
