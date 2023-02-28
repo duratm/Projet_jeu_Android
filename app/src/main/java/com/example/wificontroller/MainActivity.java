@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -56,19 +57,29 @@ public class MainActivity extends AppCompatActivity {
             adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
             spinner.setAdapter(adapter);
         }
+        TextView textFromInput = findViewById(R.id.enter);
+
+        spinner.setOnItemSelectedListener(
+                new AdapterView.OnItemSelectedListener(){
+                    @Override
+                    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                        textFromInput.setText(spinner.getSelectedItem().toString());
+                    }
+
+                    @Override
+                    public void onNothingSelected(AdapterView<?> adapterView) {
+
+                    }
+                }
+        );
 
         button.setOnClickListener(
                 new View.OnClickListener() {
                     public void onClick(View v) {
-                        TextView textFromInput = findViewById(R.id.enter);
+                        //TextView textFromInput = findViewById(R.id.enter);
                         String adressServer = textFromInput.getText().toString();
                         GameMessageManager.logActivity(true);
-                        if (adressServer.equals("")){
-                            GameMessageManager.connect(spinner.getSelectedItem().toString());
-                        }
-                        else {
-                            GameMessageManager.connect(adressServer);
-                        }
+                        GameMessageManager.connect(adressServer);
                         FileOutputStream outputStream = null;
 
 
