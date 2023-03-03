@@ -4,6 +4,12 @@ import com.pes.androidmaterialcolorpickerdialog.ColorPicker;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
+import android.view.Gravity;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,6 +18,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.widget.Button;
+import android.widget.LinearLayout;
+import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
 import com.pes.androidmaterialcolorpickerdialog.ColorPickerCallback;
@@ -31,12 +39,66 @@ public class MainActivity extends AppCompatActivity {
 
     public final static String COLOR = "com.example.wificontroller.COLOR";
     public static final String NAME = "com.example.wificontroller.NAME";
-    int color = 4651321;
+
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle item selection
+        switch (item.getItemId()) {
+            case R.id.settings:
+                showSettings();
+                return true;
+            case R.id.help:
+                onButtonShowPopupWindowClick(new View(this));
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    public void onButtonShowPopupWindowClick(View view) {
+
+        // inflate the layout of the popup window
+        LayoutInflater inflater = (LayoutInflater)
+                getSystemService(LAYOUT_INFLATER_SERVICE);
+        View popupView = inflater.inflate(R.layout.activity_help, null);
+
+        // create the popup window
+        int width = LinearLayout.LayoutParams.WRAP_CONTENT;
+        int height = LinearLayout.LayoutParams.WRAP_CONTENT;
+        boolean focusable = true; // lets taps outside the popup also dismiss it
+        final PopupWindow popupWindow = new PopupWindow(popupView, width, height, focusable);
+
+        // show the popup window
+        // which view you pass in doesn't matter, it is only used for the window tolken
+        popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0);
+
+        // dismiss the popup window when touched
+        popupView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                popupWindow.dismiss();
+                return true;
+            }
+        });
+    }
+
+    private void showSettings() {
+        Intent intent = new Intent(this, Setting.class);
+        startActivity(intent);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        initializeColorPicker();
 
         Spinner spinner = (Spinner) findViewById(R.id.spinner);
         final Button button = findViewById(R.id.connect);
@@ -81,25 +143,7 @@ public class MainActivity extends AppCompatActivity {
                 });
     }
 
-    private void initializeColorPicker() {
-        final Button button = findViewById(R.id.colorPicker);
-        final ColorPicker cp = new ColorPicker(MainActivity.this, 255, 0, 0, 0);
-        button.setOnClickListener(
-                new View.OnClickListener() {
-                    public void onClick(View v) {
-                        cp.show();
-                        cp.enableAutoClose();
-                        cp.setCallback(new ColorPickerCallback() {
-                            @Override
-                            public void onColorChosen(int colour) {
 
-                                Log.i("color", String.valueOf(cp.getColor()));
-                                color = cp.getColor();
-                            }
-                        });
-                    }
-                });
-    }
 
     public void control() {
         new Thread(new Runnable() {
@@ -128,11 +172,11 @@ public class MainActivity extends AppCompatActivity {
         Intent intent = new Intent(this, ControllerActivity.class);
         TextView name = findViewById(R.id.name);
         intent.putExtra(NAME, name.getText().toString());
-        intent.putExtra(COLOR, String.valueOf(color));
+        intent.putExtra(COLOR, String.valueOf(Setting.color));
         new Thread(new Runnable() {
             @Override
             public void run() {
-                GameMessageManager.sendMessage("NAME=" + name.getText().toString() + "#COL=" + color + "#MSG=Salut");
+                GameMessageManager.sendMessage("NAME=" + name.getText().toString() + "#COL=" + Setting.color + "#MSG=Salut");
             }
         }).start();
         startActivity(intent);
