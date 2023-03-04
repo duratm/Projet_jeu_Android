@@ -1,6 +1,5 @@
 package com.example.wificontroller;
 
-import com.pes.androidmaterialcolorpickerdialog.ColorPicker;
 import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
@@ -22,7 +21,6 @@ import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.Spinner;
 import android.widget.TextView;
-import com.pes.androidmaterialcolorpickerdialog.ColorPickerCallback;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -32,8 +30,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Objects;
 import static java.lang.Thread.sleep;
+
+import org.w3c.dom.Text;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -104,21 +105,29 @@ public class MainActivity extends AppCompatActivity {
         final Button button = findViewById(R.id.connect);
 
         ArrayList<String> adresses = lireFichier();
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, adresses);
+        ArrayList<String> adresseConcat = new ArrayList<>();
+        for (String adresse : adresses){
+            Log.i("adresse", adresse);
+            String[] adresses2 = adresse.split(",");
+            adresseConcat.add(adresses2[0]+" | "+adresses2[1]+" | "+adresses2[2]);
+        }
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, adresseConcat);
         adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         spinner.setAdapter(adapter);
 
         TextView textFromInput = findViewById(R.id.enter);
-
+        TextView textFromInputName = findViewById(R.id.name);
         spinner.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener(){
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        if ((adresses.size() == 1) || (spinner.getSelectedItem().toString().equals("Choisissez dans votre historique"))){
+                        if ((adresses.size() == 1) || (spinner.getSelectedItem().toString().split(" | ")[0].equals("Choisissez"))){
                             textFromInput.setText("");
+                            textFromInputName.setText("");
                         }
                         else {
-                            textFromInput.setText(spinner.getSelectedItem().toString());
+                            textFromInput.setText(spinner.getSelectedItem().toString().split(" | ")[0]);
+                            textFromInputName.setText(spinner.getSelectedItem().toString().split(" | ")[2]);
                         }
                     }
 
@@ -133,10 +142,12 @@ public class MainActivity extends AppCompatActivity {
                 new View.OnClickListener() {
                     public void onClick(View v) {
                         TextView textFromInput = findViewById(R.id.enter);
+                        TextView textFromInputName = findViewById(R.id.name);
+                        String name = textFromInputName.getText().toString();
                         String adressServer = textFromInput.getText().toString();
                         GameMessageManager.logActivity(true);
                         GameMessageManager.connect(adressServer);
-                        ecrireFichier(adressServer);
+                        ecrireFichier(adressServer, name);
                         control();
                         //GameMessageManager.sendMessage("MOTL=0.5");
                     }
@@ -186,7 +197,7 @@ public class MainActivity extends AppCompatActivity {
         FileInputStream inputStream = null;
         File file = new File(getFilesDir(), "test3");
         ArrayList<String> adresses = new ArrayList<String>();
-        adresses.add(0, "Choisissez dans votre historique");
+        adresses.add(0, "Choisissez dans votre historique, , ");
         if (file.exists()) {
             try {
                 inputStream = openFileInput("test3");
@@ -207,16 +218,18 @@ public class MainActivity extends AppCompatActivity {
         return adresses;
     }
 
-    public void ecrireFichier(String adressServer) {
+    public void ecrireFichier(String adressServer, String name) {
         File file = new File(getFilesDir(), "test3");
         ArrayList<String> adresses = lireFichier();
+        String[] tableau = new String[]{adressServer, name, String.valueOf(Setting.color)};
+        String chaine = String.join(",", tableau);
         FileOutputStream outputStream = null;
         if (!Objects.equals(adressServer, "")) {
             if (!file.exists()) {
                 FileOutputStream fileOutputStream = null;
                 try {
                     fileOutputStream = openFileOutput("test3", Context.MODE_PRIVATE);
-                    fileOutputStream.write((adressServer + System.getProperty("line.separator")).getBytes());
+                    fileOutputStream.write((chaine + System.getProperty("line.separator")).getBytes());
                     fileOutputStream.close();
                 } catch (FileNotFoundException e) {
                     throw new RuntimeException(e);
@@ -225,13 +238,25 @@ public class MainActivity extends AppCompatActivity {
                 }
 
             } else {
-                if (!adresses.contains(adressServer)) {
+                int dedans = 0;
+//                for (String[] adresse: adresses){
+//                    if (adresse[0].equals(adressServer) || adresse[1].equals(adressServer) || adresse[2].equals(adressServer)){
+//                        dedans ++;
+//                    }
+//                }
+                for (String adresse : adresses){
+                    String[] adresse2 = adresse.split(",");
+                    if (adresse2[0].equals(adressServer) && adresse2[1].equals(name) && adresse2[2].equals(String.valueOf(Setting.color))){
+                        dedans++;
+                    }
+                }
+                if (dedans==0) {
                     Log.i("adresses", adresses.toString());
                     Log.i("add", adressServer);
                     FileOutputStream fileOutputStream = null;
                     try {
                         fileOutputStream = openFileOutput("test3", Context.MODE_APPEND);
-                        fileOutputStream.write((adressServer + System.getProperty("line.separator")).getBytes());
+                        fileOutputStream.write((chaine + System.getProperty("line.separator")).getBytes());
                         fileOutputStream.close();
                     } catch (FileNotFoundException e) {
                         throw new RuntimeException(e);
