@@ -1,6 +1,5 @@
 package com.example.wificontroller;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -18,11 +17,12 @@ public class Setting extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_settings);
         initializeColorPicker();
     }
 
     private void initializeColorPicker() {
-        final Button button = (Button) findViewById(R.id.colorPicker);
+        Button button = (Button) findViewById(R.id.button2);
         final ColorPicker cp = new ColorPicker(Setting.this, 255, 0, 0, 0);
         button.setOnClickListener(
                 new View.OnClickListener() {
