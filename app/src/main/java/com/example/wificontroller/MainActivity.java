@@ -107,7 +107,6 @@ public class MainActivity extends AppCompatActivity {
         ArrayList<String> adresses = lireFichier();
         ArrayList<String> adresseConcat = new ArrayList<>();
         for (String adresse : adresses){
-            Log.i("adresse", adresse);
             String[] adresses2 = adresse.split(",");
             adresseConcat.add(adresses2[0]+" | "+adresses2[1]+" | "+adresses2[2]);
         }
@@ -161,7 +160,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 while (!GameMessageManager.isConnected()) {
-                    Log.i("cbot", "Waiting for connection");
                     try {
                         sleep(5);
                     } catch (InterruptedException e) {
@@ -171,7 +169,6 @@ public class MainActivity extends AppCompatActivity {
                 runOnUiThread(new Runnable() {
                     @Override
                     public void run() {
-                        Log.i("cbot","launchng");
                         game();
                     }
                 });
@@ -239,11 +236,6 @@ public class MainActivity extends AppCompatActivity {
 
             } else {
                 int dedans = 0;
-//                for (String[] adresse: adresses){
-//                    if (adresse[0].equals(adressServer) || adresse[1].equals(adressServer) || adresse[2].equals(adressServer)){
-//                        dedans ++;
-//                    }
-//                }
                 for (String adresse : adresses){
                     String[] adresse2 = adresse.split(",");
                     if (adresse2[0].equals(adressServer) && adresse2[1].equals(name) && adresse2[2].equals(String.valueOf(Setting.color))){
@@ -251,8 +243,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 if (dedans==0) {
-                    Log.i("adresses", adresses.toString());
-                    Log.i("add", adressServer);
                     FileOutputStream fileOutputStream = null;
                     try {
                         fileOutputStream = openFileOutput("test3", Context.MODE_APPEND);

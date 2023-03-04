@@ -1,7 +1,6 @@
 package com.example.wificontroller;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -33,7 +32,6 @@ public class Setting extends AppCompatActivity {
                             @Override
                             public void onColorChosen(int colour) {
 
-                                Log.i("color", String.valueOf(cp.getColor()));
                                 color = cp.getColor();
                             }
                         });
