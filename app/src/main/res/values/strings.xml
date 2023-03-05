@@ -25,7 +25,7 @@
     <string name="hide">hide</string>
     <string name="TravOn">Auto Aim ON</string>
     <string name="TravOFF">Auto Aim OFF</string>
-    <string name="Choose">Choose address on history</string>
+    <string name="Choose">Choose address on history, , ,</string>
     <string name="ChooseControllerJoystickON">Joystick cheats</string>
     <string name="ChooseControllerButtonOFF">Button classic</string>
     <string name="Home">Home</string>
@@ -33,7 +33,7 @@
     <string name="Buttoncontroller">ButtonController</string>
     <string name="settings">settings</string>
     <string name="help">help</string>
-    <string name="help_text">Petite aide pour les nullos</string>
-    <string name="credits">© Quentin FARRET et Mathias DURAT</string>
-    <string name="aide">Aucun aide disponible car vous êtes trop trop fort ! ;)</string>
+    <string name="credits">© Quentin FARRET and Mathias DURAT</string>
+    <string name="help_text">Small help for the little dumbass</string>
+    <string name="aide">No help available ecause you are just to strong and smart ! ;)</string>
 </resources>

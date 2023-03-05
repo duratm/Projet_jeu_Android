@@ -25,7 +25,12 @@
     <string name="hide">camoufler</string>
     <string name="TravOn">visé automatique ON</string>
     <string name="TravOFF">visé automatique OFF</string>
-    <string name="Choose">Choississez l\'adresse dans l\'historique</string>
+    <string name="settings">paramétres</string>
+    <string name="help">aide</string>
+    <string name="help_text">Petite aide pour les nullos</string>
+    <string name="credits">© Quentin FARRET et Mathias DURAT</string>
+    <string name="aide">Aucun aide disponible car vous êtes trop trop fort ! ;)</string>
+    <string name="Choose">Choississez l\'adresse dans l\'historique, , ,</string>
     <string name="ChooseControllerJoystickON">Joystick triche</string>
     <string name="ChooseControllerButtonOFF">Bouton classique</string>
     <string name="Home">Home</string>

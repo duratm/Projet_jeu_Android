@@ -11,6 +11,7 @@
         android:id="@+id/enter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="260dp"
         android:autofillHints=""
         android:ems="10"
         android:hint="@string/enter"
@@ -18,9 +19,9 @@
         android:minHeight="48dp"
         app:layout_constraintBottom_toTopOf="@+id/connect"
         app:layout_constraintEnd_toEndOf="@+id/spinner"
+        app:layout_constraintHorizontal_bias="0.518"
         app:layout_constraintStart_toStartOf="@+id/spinner"
         app:layout_constraintTop_toBottomOf="@+id/spinner"
-        app:layout_constraintVertical_bias="0.050000012"
         tools:ignore="LabelFor" />
 
     <Button
@@ -36,12 +37,14 @@
         tools:ignore="UsingOnClickInXml" />
 
     <Spinner
+        android:id="@+id/spinner"
         android:layout_width="129dp"
         android:layout_height="23dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.179" />
+        app:layout_constraintVertical_bias="0.16000003" />
 
 
     <EditText
@@ -53,7 +56,6 @@
         android:inputType="textPersonName"
         app:layout_constraintBottom_toTopOf="@+id/toggleButton"
         app:layout_constraintEnd_toEndOf="@+id/enter"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="@+id/enter"
         app:layout_constraintTop_toBottomOf="@+id/enter" />
 
@@ -68,6 +70,6 @@
         app:layout_constraintEnd_toEndOf="@+id/name"
         app:layout_constraintStart_toStartOf="@+id/name"
         app:layout_constraintTop_toBottomOf="@+id/enter"
-        app:layout_constraintVertical_bias="0.79" />
+        app:layout_constraintVertical_bias="0.782" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

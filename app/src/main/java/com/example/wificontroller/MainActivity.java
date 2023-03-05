@@ -110,8 +110,10 @@ public class MainActivity extends AppCompatActivity {
 
         ArrayList<String> adresses = lireFichier();
         ArrayList<String> adresseConcat = new ArrayList<>();
+        Log.i("Spinner", "onItemSelected: " + adresses);
         for (String adresse : adresses){
             String[] adresses2 = adresse.split(",");
+            Log.i("Spinner", "onItemSelected: " + adresses2[0]);
             adresseConcat.add(adresses2[0]+" | "+adresses2[1]+" | "+adresses2[2]);
         }
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, R.layout.support_simple_spinner_dropdown_item, adresseConcat);
@@ -120,11 +122,13 @@ public class MainActivity extends AppCompatActivity {
 
         TextView textFromInput = findViewById(R.id.enter);
         TextView textFromInputName = findViewById(R.id.name);
+        Log.i("Spinner", "onItemSelected: " + spinner.getSelectedItem().toString().split(" | ")[0] + " " + getString(R.string.Choose).split(" ")[0]);
         spinner.setOnItemSelectedListener(
                 new AdapterView.OnItemSelectedListener(){
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        if ((adresses.size() == 1) || (spinner.getSelectedItem().toString().split(",")[0].equals(getString(R.string.Choose)))){
+                        Log.i("Spinner", "onItemSelected: " + spinner.getSelectedItem().toString().split(" | ")[0] + " " + getString(R.string.Choose).split(" ")[0]);
+                        if ((adresses.size() == 1) || (spinner.getSelectedItem().toString().split(" | ")[0].equals(getString(R.string.Choose).split(" ")[0]))){
                             textFromInput.setText("");
                             textFromInputName.setText("");
                         }
@@ -155,9 +159,6 @@ public class MainActivity extends AppCompatActivity {
                     }
                 });
     }
-
-
-
     public void control() {
         new Thread(new Runnable() {
             @Override
