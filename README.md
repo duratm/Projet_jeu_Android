@@ -10,7 +10,7 @@
 
 ## 2. Nous avons donc mis en place 2 **controlleurs** :
 + 1 avec un **joystick** et des **_fonctionnalités de triches_**
-+ 1 avec des **boutons** (en forme de croix) sans les **fonctionnalités de **_triches_**
++ 1 avec des **boutons** (en forme de croix) sans les **fonctionnalités de _triches_**
 
 
 ## 3. Concernant le **controlleur avec boutons** (sans triche):
