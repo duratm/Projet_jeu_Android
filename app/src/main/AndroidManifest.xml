@@ -6,25 +6,37 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/png_transparent_video_game_game_controllers_gaming_miscellaneous_game_logo_thumbnail"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/png_transparent_video_game_game_controllers_gaming_miscellaneous_game_logo_thumbnail"
         android:supportsRtl="true"
         android:theme="@style/Theme.WifiController">
         <activity
-            android:name=".FirstController"
-            android:exported="false" />
+            android:name=".ButtonController"
+            android:exported="true"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity
-            android:name=".ControllerActivity"
-            android:exported="true" />
+            android:name=".JoystickController"
+            android:exported="true"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
         <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+            <meta-data
+                android:name=".MainActivity"
+                android:value="" />
         </activity>
     </application>
 

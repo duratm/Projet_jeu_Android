@@ -1,6 +1,7 @@
 package com.example.wificontroller;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -8,38 +9,33 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import android.widget.ToggleButton;
 
-import java.util.Locale;
-import java.util.Objects;
-
 import static com.example.wificontroller.JoystickView.getsVMax;
 import static java.lang.Thread.sleep;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
 
-public class ControllerActivity extends AppCompatActivity {
+import android.app.Activity;
 
+public class JoystickController extends FragmentActivity {
+
+    private final StayAliveRunnable stayAlive = new StayAliveRunnable();
     private final AutoAimRunnable directionToShoot = new AutoAimRunnable();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_controller);
 
+        new Thread(stayAlive).start();
         new Thread(directionToShoot).start();
 
-        new Thread(() -> {
-            if (!getIntent().getStringExtra(MainActivity.NAME).equals("")) {
-                GameMessageManager.sendMessage("NAME=" + getIntent().getStringExtra(MainActivity.NAME) + "#COL=" + getIntent().getStringExtra(MainActivity.COLOR) + "#MSG=Salut");
-                Log.i("kikoo", getIntent().getStringExtra(MainActivity.NAME));
-            } else {
-                GameMessageManager.sendMessage("COL=" + getIntent().getStringExtra(MainActivity.COLOR) + "#MSG=Salut");
-            }
-        }).start();
         toggleAutoFire();
         actionFire();
-        createJoystick();
         setUpEmotes();
         toggleHide();
         toggleTrav();
+        createJoystick();
+
     }
 
     private void toggleTrav() {
@@ -201,17 +197,23 @@ public class ControllerActivity extends AppCompatActivity {
                 GameMessageManager.sendMessage("EXIT");
             }
         }).start();
+        //Intent intent = new Intent(this, MainActivity.class);
+        //startActivity(intent);
         super.onDestroy();
+        finish();
     }
+
 
     @Override
     public void onBackPressed() {
-
         new Thread(new Runnable() {
             public void run() {
                 GameMessageManager.sendMessage("EXIT");
             }
         }).start();
+        //Intent intent = new Intent(this, MainActivity.class);
+        //startActivity(intent);
         super.onBackPressed();
+        finish();
     }
 }

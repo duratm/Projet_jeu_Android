@@ -3,13 +3,12 @@
     <string name="join">Join Server</string>
     <string name="enter">Server Adress</string>
     <string name="connection">Connection to Game</string>
-    <string name="empty" />
     <string name="Fire">Fire</string>
     <string name="menuText">back to menu</string>
-    <string name="avancer">Avancer</string>
-    <string name="reculer">Reculer</string>
-    <string name="droite">Droite</string>
-    <string name="gauche">Gauche</string>
+    <string name="avancer">forward</string>
+    <string name="reculer">backward</string>
+    <string name="droite">right</string>
+    <string name="gauche">left</string>
     <string name="tir">Button</string>
     <string name="shoot">shoot</string>
     <string name="spinner">Spinner</string>
@@ -25,4 +24,12 @@
     <string name="hide">hide</string>
     <string name="TravOn">Auto Aim ON</string>
     <string name="TravOFF">Auto Aim OFF</string>
+    <string name="Choose">Choose address on history</string>
+    <string name="ChooseControllerJoystickON">Joystick cheats</string>
+    <string name="ChooseControllerButtonOFF">Button classic</string>
+    <string name="Home">Home</string>
+    <string name="JoystickController">JoystickController</string>
+    <string name="Buttoncontroller">ButtonController</string>
+    <string name="dummy_button">Dummy Button</string>
+    <string name="dummy_content">DUMMY\nCONTENT</string>
 </resources>

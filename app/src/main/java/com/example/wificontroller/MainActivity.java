@@ -9,11 +9,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
 
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.ToggleButton;
+
 import com.pes.androidmaterialcolorpickerdialog.ColorPickerCallback;
 
 import java.io.BufferedReader;
@@ -27,7 +30,7 @@ import java.util.ArrayList;
 import java.util.Objects;
 import static java.lang.Thread.sleep;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends FragmentActivity {
 
     public final static String COLOR = "com.example.wificontroller.COLOR";
     public static final String NAME = "com.example.wificontroller.NAME";
@@ -52,7 +55,7 @@ public class MainActivity extends AppCompatActivity {
                 new AdapterView.OnItemSelectedListener(){
                     @Override
                     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                        if ((adresses.size() == 1) || (spinner.getSelectedItem().toString().equals("Choisissez dans votre historique"))){
+                        if ((adresses.size() == 1) || (spinner.getSelectedItem().toString().equals(getString(R.string.Choose)))){
                             textFromInput.setText("");
                         }
                         else {
@@ -72,11 +75,10 @@ public class MainActivity extends AppCompatActivity {
                     public void onClick(View v) {
                         TextView textFromInput = findViewById(R.id.enter);
                         String adressServer = textFromInput.getText().toString();
+                        ecrireFichier(adressServer);
                         GameMessageManager.logActivity(true);
                         GameMessageManager.connect(adressServer);
-                        ecrireFichier(adressServer);
                         control();
-                        //GameMessageManager.sendMessage("MOTL=0.5");
                     }
                 });
     }
@@ -105,27 +107,34 @@ public class MainActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                while (!GameMessageManager.isConnected()) {
-                    Log.i("cbot", "Waiting for connection");
+                int count = 0;
+                while (!GameMessageManager.isConnected() && count < 1000) {
+                    //Log.i("cbot", "Waiting for connection");
+                    count ++;
                     try {
                         sleep(5);
                     } catch (InterruptedException e) {
                         e.printStackTrace();
                     }
                 }
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        Log.i("cbot","launchng");
-                        game();
-                    }
-                });
+                if (count < 1000) {
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            game();
+                        }
+                    });
+                }
             }
         }).start();
     }
 
     public void game() {
-        Intent intent = new Intent(this, ControllerActivity.class);
+        ToggleButton toggle = (ToggleButton) findViewById(R.id.toggleButton);
+        Intent intent = new Intent(this, ButtonController.class);
+        if (toggle.isChecked()) {
+            intent = new Intent(this, JoystickController.class);
+        }
         TextView name = findViewById(R.id.name);
         intent.putExtra(NAME, name.getText().toString());
         intent.putExtra(COLOR, String.valueOf(color));
@@ -142,7 +151,7 @@ public class MainActivity extends AppCompatActivity {
         FileInputStream inputStream = null;
         File file = new File(getFilesDir(), "test3");
         ArrayList<String> adresses = new ArrayList<String>();
-        adresses.add(0, "Choisissez dans votre historique");
+        adresses.add(0, getString(R.string.Choose));
         if (file.exists()) {
             try {
                 inputStream = openFileInput("test3");
