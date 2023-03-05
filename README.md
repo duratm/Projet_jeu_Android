@@ -35,3 +35,8 @@
 + Un **bouton de tire**
 + Des Boutons afin de faire des **émotes**
 >- La fonctionnalité visé automatique est géré grace à un thread pour le quel on a crée un runnable et qui se charge d'ajuster la position de tir quand il y en a besoin.    
+
+## 5. Sur l'application en général:
++ Mise en place de l'internationalisation de tout les textes les paramètres par défaut sont en anglais mais l'application est disponible en français aussi
++ Modification des thèmes dark et par défaut (pour une couleur orange)
++ Mise en place d'une image d'application personnalisé 
