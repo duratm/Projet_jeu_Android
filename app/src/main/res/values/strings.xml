@@ -3,6 +3,7 @@
     <string name="join">Join Server</string>
     <string name="enter">Server Adress</string>
     <string name="connection">Connection to Game</string>
+    <string name="empty"></string>
     <string name="Fire">Fire</string>
     <string name="menuText">back to menu</string>
     <string name="avancer">forward</string>
@@ -30,6 +31,9 @@
     <string name="Home">Home</string>
     <string name="JoystickController">JoystickController</string>
     <string name="Buttoncontroller">ButtonController</string>
-    <string name="dummy_button">Dummy Button</string>
-    <string name="dummy_content">DUMMY\nCONTENT</string>
+    <string name="settings">settings</string>
+    <string name="help">help</string>
+    <string name="help_text">Petite aide pour les nullos</string>
+    <string name="credits">© Quentin FARRET et Mathias DURAT</string>
+    <string name="aide">Aucun aide disponible car vous êtes trop trop fort ! ;)</string>
 </resources>

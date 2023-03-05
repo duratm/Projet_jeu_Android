@@ -36,25 +36,13 @@
         tools:ignore="UsingOnClickInXml" />
 
     <Spinner
-        android:id="@+id/spinner"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/connect"
-        app:layout_constraintEnd_toEndOf="@+id/colorPicker"
-        app:layout_constraintStart_toStartOf="@+id/colorPicker"
-        app:layout_constraintTop_toBottomOf="@+id/colorPicker"
-        app:layout_constraintVertical_bias="0.16000003" />
-
-    <Button
-        android:id="@+id/colorPicker"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/colorPicker"
-        app:layout_constraintBottom_toTopOf="@+id/connect"
+        android:layout_width="129dp"
+        android:layout_height="23dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.097" />
+        app:layout_constraintVertical_bias="0.179" />
+
 
     <EditText
         android:id="@+id/name"

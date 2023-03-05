@@ -158,12 +158,10 @@ public class JoystickController extends FragmentActivity {
             double Vd1 = ((double) Vd/getsVMax())+0.5;
             new Thread(new Runnable() {
                 public void run() {
-                    Log.i("kikoo", Vg1+"#MotR=" + Vd1);
                     GameMessageManager.sendMessage("MotL=" + Vg1+"#MotR=" + Vd1);
                 }
             }).start();
         };
-        Log.i("kikoo", String.valueOf(GameMessageManager.isConnected()));
         FrameLayout frame = findViewById(R.id.frame);
         JoystickView joystick =  new JoystickView(this,value);
         joystick.setJoystickRadius(300);
@@ -184,7 +182,6 @@ public class JoystickController extends FragmentActivity {
                         throw new RuntimeException(e);
                     }
                     GameMessageManager.sendMessage("GunTrig=0#Guntrav=0.5");
-                    Log.i("kikoo", String.valueOf(GameMessageManager.getNextMessage()));
                 }
             }).start();
         });
@@ -197,12 +194,8 @@ public class JoystickController extends FragmentActivity {
                 GameMessageManager.sendMessage("EXIT");
             }
         }).start();
-        //Intent intent = new Intent(this, MainActivity.class);
-        //startActivity(intent);
         super.onDestroy();
-        finish();
     }
-
 
     @Override
     public void onBackPressed() {
@@ -211,9 +204,6 @@ public class JoystickController extends FragmentActivity {
                 GameMessageManager.sendMessage("EXIT");
             }
         }).start();
-        //Intent intent = new Intent(this, MainActivity.class);
-        //startActivity(intent);
         super.onBackPressed();
-        finish();
     }
 }
