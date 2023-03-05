@@ -16,7 +16,9 @@
 ## 3. Concernant le **controlleur avec boutons** (sans triche):
 + Mise en place des boutons Avancer, tourner à droite, tourner à gauche, le bouton reculer ne fonctionne pas car il est inutile pour moi
 + Mise en place du bouton tirer, il ne fait que tirer devant le joueur.
-+ Essai de mise en place de **changement de direction en fonction de l'orientation** du pion (cf. [_orientation.jpg_](https://gitlab.iut-valence.fr/duratm/duratfarretandroid/-/blob/master/orientation.jpg)).
++ Essai de mise en place de **changement de direction en fonction de l'orientation** du pion (cf. [_orientation.jpg_](https://gitlab.iut-valence.fr/duratm/duratfarretandroid/-/blob/master/orientation.jpg)). ![This is an image](https://gitlab.iut-valence.fr/duratm/duratfarretandroid/-/raw/master/orientation.jpg)
+
+
 1. Pour le changement de direction en fonction de l'orientation plusieurs options s'offraient à moi :
 - J'ai d'abord commencé par changer la **place** des boutons en fonction de l'orientation du joueur. Mais cette solution demande trop de ressource et n'est pas top niveau IHM
 - J'en ai donc conclus qu'il fallait que je change le **contenu des sendMessage()** en fonction des orientations.
