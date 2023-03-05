@@ -2,7 +2,6 @@ package com.example.wificontroller;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.FrameLayout;
@@ -29,7 +28,6 @@ public class ControllerActivity extends AppCompatActivity {
         new Thread(() -> {
             if (!getIntent().getStringExtra(MainActivity.NAME).equals("")) {
                 GameMessageManager.sendMessage("NAME=" + getIntent().getStringExtra(MainActivity.NAME) + "#COL=" + getIntent().getStringExtra(MainActivity.COLOR) + "#MSG=Salut");
-                Log.i("kikoo", getIntent().getStringExtra(MainActivity.NAME));
             } else {
                 GameMessageManager.sendMessage("COL=" + getIntent().getStringExtra(MainActivity.COLOR) + "#MSG=Salut");
             }
@@ -162,12 +160,10 @@ public class ControllerActivity extends AppCompatActivity {
             double Vd1 = ((double) Vd/getsVMax())+0.5;
             new Thread(new Runnable() {
                 public void run() {
-                    Log.i("kikoo", Vg1+"#MotR=" + Vd1);
                     GameMessageManager.sendMessage("MotL=" + Vg1+"#MotR=" + Vd1);
                 }
             }).start();
         };
-        Log.i("kikoo", String.valueOf(GameMessageManager.isConnected()));
         FrameLayout frame = findViewById(R.id.frame);
         JoystickView joystick =  new JoystickView(this,value);
         joystick.setJoystickRadius(300);
@@ -188,7 +184,6 @@ public class ControllerActivity extends AppCompatActivity {
                         throw new RuntimeException(e);
                     }
                     GameMessageManager.sendMessage("GunTrig=0#Guntrav=0.5");
-                    Log.i("kikoo", String.valueOf(GameMessageManager.getNextMessage()));
                 }
             }).start();
         });

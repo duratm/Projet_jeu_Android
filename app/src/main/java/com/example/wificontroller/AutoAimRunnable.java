@@ -26,7 +26,7 @@ public class AutoAimRunnable implements Runnable{
                 }
                 String message = GameMessageManager.getNextMessage();
                 assert message != null;
-                if (!message.equals("EMPTY")) {
+                if (!message.trim().equals("EMPTY")) {
                     Log.i("oeeee", String.format(Locale.ENGLISH, "%.4f", Double.parseDouble(message.split("/")[0])));
                     //                   GameMessageManager.sendMessage("GunTrav=" + String.format(Locale.ENGLISH, "%.4f", Double.parseDouble(message.split("/")[0])));
                     GameMessageManager.sendMessage("GunTrav=" + message.split("/")[0]);
