@@ -1,0 +1,689 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Decompiling Java and Android applications</title>
+  <meta name="description" content="decompiling Java and Android applications..."/>
+  <meta name="keywords" content="" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta name="robots" content="noindex">
+
+
+
+  <link rel="shortcut icon" href="/favicon.ico">
+
+  <link rel="stylesheet" media="screen" href="/assets/application-412590aa10921922937ed24a267e03db21a14e076b550da9bd9448fd01fb0f78.css" />
+  <link rel="stylesheet" href="/assets/css/global.css" />
+
+  <!--[if IE 7]>
+  <link rel="stylesheet" href="/assets/css/font-awesome-ie7.min.css" />
+  <![endif]-->
+
+
+  <!--[if lte IE 8]>
+  <link rel="stylesheet" href="/assets/css/ace-ie.min.css" />
+  <![endif]-->
+
+  <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!--[if lt IE 9]>
+  <script src="/assets/js/html5shiv.js"></script>
+  <script src="/assets/js/respond.min.js"></script>
+  <![endif]-->
+
+
+
+  <!-- social -->
+  <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+
+  <style>
+      .ui-autocomplete-loading { background: white url('/images/ui-anim_basic_16x16.gif') no-repeat center right !important; }
+      #select_origin { width: 25em; }
+      #select_destination { width: 25em; }
+      .dummy {
+          margin-top: 100%;
+      }
+
+      .centered{
+          float: none;
+          margin: 0 auto;
+          text-align: center;
+          align: center;
+      }
+
+  </style>
+
+  <!-- Ezoic Ad Testing Code-->
+  <script src="//g.ezoic.net/ezoic/ezoiclitedata.go?did=76263"></script>
+  <!-- Ezoic Ad Testing Code-->
+
+  <meta name="csrf-param" content="authenticity_token" />
+<meta name="csrf-token" content="Wm+Cw566RzPNhOVpw4YZO0V1mC+fqo9pwE+B+AAwcp4I+59RCgoavXmmA10f1lL7gQ9/3MBCYq2QOMiBTlr92A==" />
+  
+    
+        <script src="https://www.google.com/recaptcha/api.js?render=6LcA4_YUAAAAAKLGYp6oDWY6XOX-9wFKU30w82ws"></script>
+      
+
+</head>
+
+<!--[if IE ]>
+<body class="skin-0" style="visibility: hidden !important;">
+<style>
+@-webkit-keyframes HrSsj {0% {opacity: 0;}80% {opacity: 0;}100% {opacity: 1;}}
+@keyframes HrSsj {0% {opacity: 0;}80% {opacity: 0;}100% {opacity: 1;}}
+</style>
+<div id="babasbmsgx" style="visibility: visible; -webkit-animation-name: HrSsj;-webkit-animation-duration: 5s; animation-name: HrSsj;animation-duration: 5s;">
+Please disable your adblock and script blockers to view this page.
+</div>
+
+<![endif]-->
+<!--[if !IE]>-->
+<!-- <body class = "skin-0" style = "zoom: 125%" style="visibility: hidden !important;"> -->
+<!--<![endif]-->
+
+
+<div class="navbar navbar-default" id="navbar">
+  <script type="text/javascript">
+      try{ace.settings.check('navbar' , 'fixed')}catch(e){}
+  </script>
+  <div class="navbar-container" id="navbar-container">
+    <div class="navbar-header pull-left">
+      <a class="navbar-brand" href="/"><small><i class="icon-coffee"></i> Decompilers online</small> </a>
+      <ul class="nav pull-right ace-nav">
+      </ul>
+    </div>
+    <div class="navbar-header pull-right" role="navigation">
+
+
+
+          <ul class="nav ace-nav">
+                    <li class="green">
+                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                  <i class="icon-coffee icon-animated-vertical"></i>
+                  <span class="badge badge-success">File Name: AndroidGameServer.jar, <span id="jobstatus_span">Done.</span></span>
+                </a>
+
+            <ul class="pull-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
+              <li class="dropdown-header">
+                <i class="icon-warning-sign"></i>
+                Notification:
+              </li>
+
+              <li>
+                    <a href="/result">
+                <div class="clearfix">
+											<span class="pull-left">
+												<i class="btn btn-xs no-hover btn-pink icon-comment"></i>
+                                                        <span id="jobstatus_span2">Done.</span>
+											</span>
+                </div>
+                </a>
+              </li>
+            </ul>
+            </li>
+          </ul><!-- job status -->
+
+    </div>
+    <div class="navbar-header pull-right" role="navigation">
+    </div>
+  </div>
+</div>
+
+<div class="main-container" id="main-container">
+  <script type="text/javascript">
+      try{ace.settings.check('main-container' , 'fixed')}catch(e){}
+  </script>
+
+  <div class="main-container-inner">
+    <a class="menu-toggler" id="menu-toggler" href="#">
+      <span class="menu-text"></span>
+    </a>
+
+    <div class="sidebar" id="sidebar">
+      <script type="text/javascript">
+          try{ace.settings.check('sidebar' , 'fixed')}catch(e){}
+      </script>
+
+      <div class="sidebar-shortcuts" id="sidebar-shortcuts">
+        <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
+          <button class="btn btn-success">
+            <i class="icon-signal"></i>
+          </button>
+
+          <button class="btn btn-info">
+            <i class="icon-pencil"></i>
+          </button>
+
+          <button class="btn btn-warning">
+            <i class="icon-group"></i>
+          </button>
+
+          <button class="btn btn-danger">
+            <i class="icon-cogs"></i>
+          </button>
+        </div>
+
+        <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
+          <span class="btn btn-success"></span>
+
+          <span class="btn btn-info"></span>
+
+          <span class="btn btn-warning"></span>
+
+          <span class="btn btn-danger"></span>
+        </div>
+      </div><!-- #sidebar-shortcuts -->
+
+      <ul class="nav nav-list">
+        <li>
+          <a href="/">
+            <i class="icon-coffee"></i>
+            <span class="menu-text">Java decompilers</span>
+          </a>
+        </li>
+        <li>
+          <a href="/apk">
+            <i class="icon-mobile-phone"></i>
+            <span class="menu-text">APK decompiler</span>
+          </a>
+        </li>
+        <li>
+          <a href="/apktool">
+            <i class="icon-cog"></i>
+            <span class="menu-text">ApkTool online</span>
+          </a>
+        </li>
+        <li>
+          <a href="/jad">
+            <i class="icon-download"></i>
+            <span class="menu-text">Download Jad</span>
+          </a>
+        </li>
+      </ul><!--/.nav-list-->
+
+      <div class="sidebar-collapse" id="sidebar-collapse">
+        <i class="icon-double-angle-left" data-icon1="icon-double-angle-left" data-icon2="icon-double-angle-right"></i>
+      </div>
+
+      <script type="text/javascript">
+          try{ace.settings.check('sidebar' , 'collapsed')}catch(e){}
+      </script>
+    </div>
+
+    <div class="main-content">
+      <div class="page-content">
+        <div class="page-header">
+          <h1 style="text-align: center">
+            
+          </h1>
+        </div><!-- /.page-header -->
+
+
+
+        <div class="row">
+          <div class="col-xs-12">
+            <!-- PAGE CONTENT BEGINS -->
+            
+
+
+
+
+    <div class="row">
+      <div class="col-xs-12">
+      <h3 class="header smaller lighter blue">
+        <i class="icon-bullhorn"></i>
+        Decompilation Results
+      </h3>
+      <div class="col-xs-12 col-sm-8 col-xs-10 widget-container-span">
+        <div class="widget-box">
+          <div class="widget-header header-color-blue">
+            <h5 class="bigger lighter">
+              <i class="icon-coffee"></i>
+              Decompilation Results
+            </h5>
+          </div>
+
+          <div class="widget-body">
+            <div class="widget-main">
+              <div class="row">
+                <div class="col-xs-12 col-sm-9 col-xs-6" style="text-align:center">
+                  <h4 class="text-primary">File Name: AndroidGameServer.jar</h4>
+                  <h4 class="text-primary">Decompiler: Procyon</h4>
+                  <h4 class="text-primary">Job status: <span id="jobstatus"> Done.</span></h4>
+
+                  <br/>
+                  <br/>
+                </div>
+                <iframe src="https://s.click.aliexpress.com/e/_dYsWM8p" style="width:0;height:0;border:0; border:none;"></iframe>
+                <div class="col-xs-12 col-sm-3 col-xs-2" style="text-align:center">
+                      <a href=http://www.javadecompilers.com/data/26.01.23/de624ce76c6a2de84d1b08610cdad451/AndroidGameServer_source_from_Procyon.zip
+                      <button class="btn btn-app btn-grey btn-xs radius-4">
+                        <i class="icon-download bigger-160"></i>Save
+                        <span class="badge badge-transparent"><i class="light-red icon-asterisk"></i>
+                        </span>
+                        </button></a>
+                      <br/>
+                </div>
+              </div>
+              <div style="text-align:center">
+
+
+<span class="action-buttons">
+    <a href="http://twitter.com/home?status=http://www.javadecompilers.com/ - Java decompilers in the cloud" title="Share on Twitter"  class="btn-twitter" target="_blank">
+    <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i> Twitter
+    </a>
+
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.javadecompilers.com/" title="Share on Facebook" class="btn-facebook" target="_blank">
+    <i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i> Facebook
+    </a>
+
+    <a href="http://www.stumbleupon.com/submit?url=http://www.javadecompilers.com/" title="Share on StumbleUpon" data-placement="top" class="btn-stumbleupon" target="_blank">
+    <i class="fa fa-stumbleupon"></i> Stumbleupon
+    </a>
+
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=http://www.javadecompilers.com&title=Java decompilers in the cloud&summary=useful for Java developers: decompile .class and .jar online" title="Share on LinkedIn" class="btn-linkedin" target="_blank">
+    <i class="fa fa-linkedin"></i> LinkedIn
+    </a>
+</span>
+
+</div>
+            </div>
+          </div>
+        </div>  <!-- widget-box -->
+      </div><!-- /col -->
+
+        <div class="col-xs-12 col-sm-4 col-xs-2 widget-container-span">
+                <div class="row centered">
+                  <script type="text/javascript" src="//m.servedby-buysellads.com/monetization.js"></script>
+
+                  <div id="sponsor-banner">
+                  </div>
+
+                  <script>
+					  _bsa.init('custom', 'CEAI45QW', 'placement:javadecompilerscom',
+						  {
+							  target: '#sponsor-banner',
+							  template: `
+<a href="##link##" class="native-banner" target="_blank" style="background: linear-gradient(-330deg, ##backgroundColor##D9, ##backgroundColor##D9 30%, ##backgroundColor## 70%) #fff;">
+<img class="native-img" src="##logo##">
+<div style="color: ##textColor##" class="native-tagline">##tagline##</div>
+<div style="color: ##textColor##" class="native-desc">##description##</div>
+<div style="color: ##ctaTextColor##; background-color: ##ctaBackgroundColor##;" class="native-cta">##callToAction##</div>
+<div style="background-color: ##textColor##B2; color: ##backgroundColor##" class="native-ad">Ad</div>
+</a>
+`
+						  }
+					  );
+                  </script>
+                </div>
+        </div>
+
+      </div><!-- /col -->
+    </div><!-- /row -->
+
+
+
+        
+<br/>
+<div class="row">
+  <div class="col-xs-12">
+    <div class="widget-box">
+      <div class="widget-header widget-header-flat">
+        <h4 class="smaller">
+          <div class="breadcrumbs" id="breadcrumbs">
+            <script type="text/javascript">
+                try{ace.settings.check('breadcrumbs' , 'fixed')}catch(e){}
+            </script>
+
+            <ul class="breadcrumb">
+              <li>
+                <i class="icon-code blue"></i>
+                <a href="/result?currentfile="><b>AndroidGameServer.jar</b></a>
+              </li>
+
+                  <li  class="active" >
+                    <a href="/result?currentfile=androidgameserver"><b>androidgameserver</b></a>
+                  </li>
+            </ul><!-- .breadcrumb -->
+          </div>
+        </h4>
+      </div>
+
+
+      <div class="widget-body">
+        <div class="widget-main">
+            <div class="table-responsive">
+              <table id="sample-table-1" class="table table-hover table-striped table-bordered ">
+                <thead>
+                
+                </thead>
+                <tbody>
+                    <tr>
+                      <td>
+                      <img src = "/icons/folder.png"/>
+                      <a href="/result?currentfile=">
+                        <b>..</b>
+                      </a>
+                      </td>
+                      <td><b>folder</b></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>
+                      <img src = "/icons/folder.png"/>
+                      <a href="/result?currentfile=androidgameserver/bot">
+                        <b>bot</b>
+                      </a>
+                      </td>
+                      <td><b>folder</b></td>
+                      <td></td>
+                    </tr>
+                    <tr>
+                      <td>
+                      <img src = "/icons/folder.png"/>
+                      <a href="/result?currentfile=androidgameserver/environment">
+                        <b>environment</b>
+                      </a>
+                      </td>
+                      <td><b>folder</b></td>
+                      <td></td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                      <img src = "/icons/file.png"/>
+                      <a href="/result?currentfile=androidgameserver/Env2DViewer.java">
+                        Env2DViewer.java
+                      </a>
+                      </td>
+                      <td>.java</td>
+                      <td>24.5 KB</td>
+                    </tr>
+                    <tr>
+                      <td>
+                      <img src = "/icons/file.png"/>
+                      <a href="/result?currentfile=androidgameserver/AppFrame.java">
+                        AppFrame.java
+                      </a>
+                      </td>
+                      <td>.java</td>
+                      <td>5.24 KB</td>
+                    </tr>
+                    <tr>
+                      <td>
+                      <img src = "/icons/file.png"/>
+                      <a href="/result?currentfile=androidgameserver/AppDefines.java">
+                        AppDefines.java
+                      </a>
+                      </td>
+                      <td>.java</td>
+                      <td>1.62 KB</td>
+                    </tr>
+                    <tr>
+                      <td>
+                      <img src = "/icons/file.png"/>
+                      <a href="/result?currentfile=androidgameserver/ClientHandler.java">
+                        ClientHandler.java
+                      </a>
+                      </td>
+                      <td>.java</td>
+                      <td>5.95 KB</td>
+                    </tr>
+                    <tr>
+                      <td>
+                      <img src = "/icons/file.png"/>
+                      <a href="/result?currentfile=androidgameserver/ServerThread.java">
+                        ServerThread.java
+                      </a>
+                      </td>
+                      <td>.java</td>
+                      <td>2.1 KB</td>
+                    </tr>
+                    <tr>
+                      <td>
+                      <img src = "/icons/file.png"/>
+                      <a href="/result?currentfile=androidgameserver/AndroidGameServer.java">
+                        AndroidGameServer.java
+                      </a>
+                      </td>
+                      <td>.java</td>
+                      <td>3.41 KB</td>
+                    </tr>
+                    <tr>
+                      <td>
+                      <img src = "/icons/file.png"/>
+                      <a href="/result?currentfile=androidgameserver/StreamToJText.java">
+                        StreamToJText.java
+                      </a>
+                      </td>
+                      <td>.java</td>
+                      <td>921 Bytes</td>
+                    </tr>
+                </tbody>
+              </table>
+            </div>
+        </div>
+      </div>
+
+    </div><!-- /widget-box -->
+  </div><!-- /span -->
+</div><!-- /row -->
+
+
+
+        
+    <form enctype="multipart/form-data" action="/upload/processfile" accept-charset="UTF-8" method="post"><input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="authenticity_token" value="hBiKXr02Ty0FYVLjS8kFIDiPwfQ8s6YdbW3TkVr+C43WjJfMKYYSo7FDtNeXmU7g/PUmB2NbS9k9GproFJSEyw==" />
+        
+        <input name="new_google_recaptcha_token" type="hidden" id="new_google_recaptcha_token_ee1c72b99805646cbb4c"/>
+        <script>
+          grecaptcha.ready(function() {
+            grecaptcha.execute("6LcA4_YUAAAAAKLGYp6oDWY6XOX-9wFKU30w82ws", {action: "java"}).then(function(token) {
+              document.getElementById("new_google_recaptcha_token_ee1c72b99805646cbb4c").value = token;
+            });
+          });
+        </script>
+      
+        <div class="row">
+          <div class="col-xs-12">
+            <h3 class="header smaller lighter blue">
+              <i class="icon-cloud-upload"></i>
+              
+            </h3>
+
+            <div class="row">
+              <div class="col-xs-12 col-md-5">
+                <div class="row centered">
+                <!-- Ezoic - FileUploadAd - mid_content -->
+                <div id="ezoic-pub-ad-placeholder-104">
+                    <ins class="adsbygoogle"
+                         style="display:inline-block;width:300px;height:250px"
+                         data-ad-client="ca-pub-7898304081367697"
+                         data-ad-slot="1161539764"></ins>
+                 </div>
+                <!-- End Ezoic - FileUploadAd - mid_content -->
+                </div>
+               </div>
+
+            <div class="col-xs-12 col-md-7">
+              <div class="row">			
+              <div class="well">
+                    <input class="btn btn-info btn-sm ace" accept=".apk,.dex,.jar,.class" type="file" name="upload[datafile]" id="upload_datafile" /></p>
+
+                <button name="button" type="datafile" class="btn btn-info icon-cloud-upload bigger-110">
+                    Upload and Decompile
+</button>
+                
+    <!-- +1. -->
+
+
+
+                <br/>
+                <br/>
+                
+
+
+<span class="action-buttons">
+    <a href="http://twitter.com/home?status=http://www.javadecompilers.com/ - Java decompilers in the cloud" title="Share on Twitter"  class="btn-twitter" target="_blank">
+    <i class="ace-icon fa fa-twitter-square light-blue bigger-150"></i> Twitter
+    </a>
+
+    <a href="https://www.facebook.com/sharer/sharer.php?u=http://www.javadecompilers.com/" title="Share on Facebook" class="btn-facebook" target="_blank">
+    <i class="ace-icon fa fa-facebook-square text-primary bigger-150"></i> Facebook
+    </a>
+
+    <a href="http://www.stumbleupon.com/submit?url=http://www.javadecompilers.com/" title="Share on StumbleUpon" data-placement="top" class="btn-stumbleupon" target="_blank">
+    <i class="fa fa-stumbleupon"></i> Stumbleupon
+    </a>
+
+    <a href="http://www.linkedin.com/shareArticle?mini=true&url=http://www.javadecompilers.com&title=Java decompilers in the cloud&summary=useful for Java developers: decompile .class and .jar online" title="Share on LinkedIn" class="btn-linkedin" target="_blank">
+    <i class="fa fa-linkedin"></i> LinkedIn
+    </a>
+</span>
+
+
+
+            </div><!-- /well -->	
+            </div><!-- /row -->
+
+             <div class="row">				
+             <div class="well">
+                <div class="control-group">
+                  <label class="control-label bolder blue">Select a decompiler</label> <br/>
+
+                  <input name="general_type" type="hidden" value="java">
+                      <div class="radio">
+                        <label>
+                          <input type="radio"  name="selected_type" value=Procyon class="ace" checked/>
+                          <span class="lbl"> Procyon - fast decompiler for modern Java</span>
+                        </label>
+                      </div>
+                      <div class="radio">
+                        <label>
+                          <input type="radio"  name="selected_type" value=CFR class="ace" />
+                          <span class="lbl"> CFR  - very good and well-supported decompiler for modern Java</span>
+                        </label>
+                      </div>
+                      <div class="radio">
+                        <label>
+                          <input type="radio"  name="selected_type" value=JDCore class="ace" />
+                          <span class="lbl"> JDCore (very fast)</span>
+                        </label>
+                      </div>
+                      <div class="radio">
+                        <label>
+                          <input type="radio"  name="selected_type" value=jadx class="ace" />
+                          <span class="lbl"> Jadx, fast and with Android support</span>
+                        </label>
+                      </div>
+                      <div class="radio">
+                        <label>
+                          <input type="radio"  name="selected_type" value=Fernflower class="ace" />
+                          <span class="lbl"> Fernflower</span>
+                        </label>
+                      </div>
+                      <div class="radio">
+                        <label>
+                          <input type="radio"  name="selected_type" value=JAD class="ace" />
+                          <span class="lbl"> JAD (very fast, but outdated)</span>
+                        </label>
+                      </div>
+                </div>
+              </div><!-- /well -->
+            </div><!-- /row -->			  
+            </div><!-- /span -->
+            </div><!-- /row -->
+          </div><!-- /col -->
+        </div><!-- /row -->
+</form>
+
+
+
+
+
+<hr />
+
+
+
+
+
+          </div>
+        </div>
+
+        <div class="row" style="text-align: center">
+          <div class="col-xs-12">
+            <a href="/privacy" target="_top">Privacy Policy</a>
+          </div>
+        </div>
+
+
+      </div><!-- /.page-content -->
+    </div><!-- /.main-content -->
+  </div><!-- /.main-container-inner -->
+
+  <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
+    <i class="icon-double-angle-up icon-only bigger-110"></i>
+  </a>
+</div><!-- /.main-container -->
+
+<!-- basic scripts -->
+
+<!--[if !IE]> -->
+<script type="application/javascript">
+    window.jQuery || document.write("<script src='http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js'>"+"<"+"/script>");
+</script>
+<!-- <![endif]-->
+<!--[if IE]>
+<script type="application/javascript">
+    window.jQuery || document.write("<script src='http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js'>"+"<"+"/script>");
+</script>
+<![endif]-->
+
+<script type="application/javascript">
+    if("ontouchend" in document) document.write("<script src='/assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+</script>
+
+<script async src="/assets/js/bootstrap.min.js"></script>
+
+
+
+<!-- inline scripts related to this page -->
+    <script type="text/javascript">
+        // A $( document ).ready() block.
+        $( document ).ready(function() {
+            var doWork = false;
+
+            setInterval(function(){
+                if (doWork) {
+                    $.ajax({
+                        url: "/job_status/WUdoQUVrcndIaE1WQnZUTHhINU9vUW9BNS9zSmtOOFVNNk1CVTAxTW9mTT0tLU00UXlKelpiZVo2V3FaaVFoTzAybkE9PQ==--b48104de2998c348fe84cf568b0f351a3c61b2b8", success: function (data) {
+                            $("#jobstatuscode").html(data.jobstatuscode);
+                            $("#jobstatus_span").html(data.jobstatus);
+                            $("#jobstatus_span2").html(data.jobstatus);
+
+                            $("#jobstatus").html(data.jobstatus);
+                            if (data.jobstatuscode > 2){
+                                doWork = false;
+                                window.location="http://www.javadecompilers.com/result";
+                            }
+                        }, dataType: "json"
+                    });
+                }
+            }, 3000);
+        });
+    </script>
+
+
+
+
+
+<!-- 4.2b -->
+<!-- Hi guys! My huge and expensive server is overloaded and just stopped working -->
+<!-- stopped breathing at all! -->
+<!-- I need to kick somebody out -->
+<!-- sorry if this is you... -->
+
+
+
+</body>
+</html>
+

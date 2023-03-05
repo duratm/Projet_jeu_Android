@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ButtonController">
+
+    <Button
+        android:id="@+id/avancer"
+        android:layout_width="120dp"
+        android:layout_height="75dp"
+        android:text="@string/avancer"
+        app:layout_constraintBottom_toTopOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="@+id/button"
+        app:layout_constraintStart_toStartOf="@+id/button"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/droite"
+        android:layout_width="100dp"
+        android:layout_height="75dp"
+        android:text="@string/droite"
+        app:layout_constraintBottom_toBottomOf="@+id/button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/button"
+        app:layout_constraintTop_toTopOf="@+id/button" />
+
+    <Button
+        android:id="@+id/gauche"
+        android:layout_width="100dp"
+        android:layout_height="75dp"
+        android:text="@string/gauche"
+        app:layout_constraintBottom_toBottomOf="@+id/button"
+        app:layout_constraintEnd_toStartOf="@+id/button"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/button" />
+
+    <Button
+        android:id="@+id/reculer"
+        android:layout_width="120dp"
+        android:layout_height="75dp"
+        android:text="@string/reculer"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/button"
+        app:layout_constraintStart_toStartOf="@+id/button"
+        app:layout_constraintTop_toBottomOf="@+id/button"
+        app:layout_constraintVertical_bias="0.0"
+        tools:ignore="MissingConstraints" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="50dp"
+        android:layout_height="75dp"
+        android:enabled="false"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.309"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.832" />
+
+    <Button
+        android:id="@+id/fire"
+        android:layout_width="119dp"
+        android:layout_height="261dp"
+        android:text="@string/Fire"
+        app:layout_constraintBottom_toBottomOf="@+id/reculer"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/droite"
+        app:layout_constraintTop_toTopOf="@+id/avancer" />
+
+    <Button
+        android:id="@+id/leftEmoteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/emoteWhat"
+        app:layout_constraintBottom_toBottomOf="@+id/centerEmoteButton"
+        app:layout_constraintEnd_toStartOf="@+id/centerEmoteButton"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/topEmoteButton" />
+
+    <Button
+        android:id="@+id/rightEmoteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/emoteSmile"
+        app:layout_constraintBottom_toBottomOf="@+id/centerEmoteButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toEndOf="@+id/centerEmoteButton"
+        app:layout_constraintTop_toTopOf="@+id/centerEmoteButton" />
+
+    <Button
+        android:id="@+id/bottomEmoteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="404dp"
+        android:text="@string/emoteBored"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/centerEmoteButton"
+        app:layout_constraintStart_toStartOf="@+id/centerEmoteButton" />
+
+    <Button
+        android:id="@+id/topEmoteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="48dp"
+        android:text="@string/emoteSheh"
+        app:layout_constraintBottom_toTopOf="@+id/centerEmoteButton"
+        app:layout_constraintEnd_toStartOf="@+id/rightEmoteButton"
+        app:layout_constraintStart_toEndOf="@+id/leftEmoteButton"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+    <Button
+        android:id="@+id/centerEmoteButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:text="@string/Emotes"
+        app:layout_constraintBottom_toTopOf="@+id/bottomEmoteButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

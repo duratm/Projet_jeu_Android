@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">WifiController</string>
+    <string name="join">rejoint le server</string>
+    <string name="enter">Adresse du serveur</string>
+    <string name="connection">Connexion au jeu</string>
+    <string name="Fire">Tirer</string>
+    <string name="menuText">retour au menu</string>
+    <string name="avancer">avancer</string>
+    <string name="reculer">reculer</string>
+    <string name="droite">droite</string>
+    <string name="gauche">gauche</string>
+    <string name="tir">bouton</string>
+    <string name="shoot">tirer</string>
+    <string name="spinner">menu déroulant</string>
+    <string name="Emotes">Emoticones</string>
+    <string name="emoteSheh">SHEH !!!</string>
+    <string name="emoteSmile">(^O^)</string>
+    <string name="emoteBored">-_-</string>
+    <string name="emoteWhat">(^_-)</string>
+    <string name="colorPicker">Choisi une couleur</string>
+    <string name="NameInput">Renseigne ton pseudo</string>
+    <string name="HideON">Camouflage ON</string>
+    <string name="HideOFF">Camouflage OFF</string>
+    <string name="hide">camoufler</string>
+    <string name="TravOn">visé automatique ON</string>
+    <string name="TravOFF">visé automatique OFF</string>
+    <string name="settings">paramétres</string>
+    <string name="help">aide</string>
+    <string name="help_text">Petite aide pour les nullos</string>
+    <string name="credits">© Quentin FARRET et Mathias DURAT</string>
+    <string name="aide">Aucun aide disponible car vous êtes trop trop fort ! ;)</string>
+    <string name="Choose">Choississez l\'adresse dans l\'historique, , ,</string>
+    <string name="ChooseControllerJoystickON">Joystick triche</string>
+    <string name="ChooseControllerButtonOFF">Bouton classique</string>
+    <string name="Home">Home</string>
+    <string name="JoystickController">JoystickController</string>
+    <string name="Buttoncontroller">ButtonController</string>
+</resources>
