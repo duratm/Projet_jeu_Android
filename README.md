@@ -21,5 +21,5 @@
 - J'ai d'abord commencé par changer la **place** des boutons en fonction de l'orientation du joueur. Mais cette solution demande trop de ressource et n'est pas top niveau IHM
 - J'en ai donc conclus qu'il fallait que je change le **contenu des sendMessage()** en fonction des orientations.
 - Mais un autre problème est survenu ! Comment récupérer les orientations ? 
-> J'ai mis en place un **pattern producteur** (producteur de'orientation, thread qui tourne en boucle qui récupère les orientations du pion) **consommateur** (threads du controlleur qui récupère les dernières orientations enregistrées).
+> J'ai mis en place un **pattern producteur** (producteur de'orientation, thread qui tourne en boucle qui récupère les orientations du pion) **consommateur** (threads du controlleur qui récupère les dernières orientations enregistrées) (cf. [_voir ce commit_](https://gitlab.iut-valence.fr/duratm/duratfarretandroid/-/commit/9ae16f59ab88248182c0c7e17f887097c6414cbe)).
     
