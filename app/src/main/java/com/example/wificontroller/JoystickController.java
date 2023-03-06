@@ -12,15 +12,12 @@ import android.widget.ToggleButton;
 import static com.example.wificontroller.JoystickView.getsVMax;
 import static java.lang.Thread.sleep;
 
-import androidx.annotation.NonNull;
-import androidx.fragment.app.FragmentActivity;
-
-import android.app.Activity;
-
-public class JoystickController extends FragmentActivity {
+import androidx.appcompat.app.AppCompatActivity;
+public class JoystickController extends AppCompatActivity {
 
     private final StayAliveRunnable stayAlive = new StayAliveRunnable();
     private final AutoAimRunnable directionToShoot = new AutoAimRunnable();
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -188,7 +185,13 @@ public class JoystickController extends FragmentActivity {
     }
 
     @Override
-    protected void onDestroy() {
+    protected synchronized void onDestroy() {
+        try {
+            this.stayAlive.stop();
+            this.directionToShoot.stop();
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
         new Thread(new Runnable() {
             public void run() {
                 GameMessageManager.sendMessage("EXIT");
@@ -198,7 +201,13 @@ public class JoystickController extends FragmentActivity {
     }
 
     @Override
-    public void onBackPressed() {
+    public synchronized void onBackPressed() {
+        try {
+            this.stayAlive.stop();
+            this.directionToShoot.stop();
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
         new Thread(new Runnable() {
             public void run() {
                 GameMessageManager.sendMessage("EXIT");

@@ -10,13 +10,15 @@ public class AutoAimRunnable implements Runnable{
 
     public boolean isRunning;
 
+    private boolean stop = false;
+
     public AutoAimRunnable (){
         isRunning = true;
     }
 
     @Override
     public void run() {
-        while (true) {
+        while (! stop) {
             if(isRunning) {
                 GameMessageManager.sendMessage("CBOT");
                 try {
@@ -32,6 +34,18 @@ public class AutoAimRunnable implements Runnable{
                     GameMessageManager.sendMessage("GunTrav=" + message.split("/")[0]);
                 }
             }
+        }
+    }
+
+    public void stop(){
+        try{
+            setRunning(false);
+            stop = true;
+            sleep(5);
+            super.finalize();
+        }
+        catch (Throwable e){
+            e.printStackTrace();
         }
     }
 
