@@ -56,24 +56,29 @@
         android:id="@+id/button"
         android:layout_width="50dp"
         android:layout_height="75dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
+        android:layout_marginBottom="75dp"
         android:enabled="false"
         android:visibility="invisible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.309"
+        app:layout_constraintHorizontal_bias="0.019"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.832" />
+        app:layout_constraintVertical_bias="0.98" />
 
     <Button
         android:id="@+id/fire"
-        android:layout_width="119dp"
-        android:layout_height="261dp"
+        android:layout_width="113dp"
+        android:layout_height="145dp"
         android:text="@string/Fire"
         app:layout_constraintBottom_toBottomOf="@+id/reculer"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.529"
         app:layout_constraintStart_toEndOf="@+id/droite"
-        app:layout_constraintTop_toTopOf="@+id/avancer" />
+        app:layout_constraintTop_toTopOf="@+id/avancer"
+        app:layout_constraintVertical_bias="0.805" />
 
     <Button
         android:id="@+id/leftEmoteButton"
@@ -101,11 +106,12 @@
         android:id="@+id/bottomEmoteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="404dp"
         android:text="@string/emoteBored"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/centerEmoteButton"
-        app:layout_constraintStart_toStartOf="@+id/centerEmoteButton" />
+        app:layout_constraintStart_toStartOf="@+id/centerEmoteButton"
+        app:layout_constraintTop_toBottomOf="@+id/centerEmoteButton"
+        app:layout_constraintVertical_bias="0.0" />
 
     <Button
         android:id="@+id/topEmoteButton"
@@ -124,11 +130,10 @@
         android:layout_height="wrap_content"
         android:enabled="false"
         android:text="@string/Emotes"
-        app:layout_constraintBottom_toTopOf="@+id/bottomEmoteButton"
+        app:layout_constraintBottom_toTopOf="@+id/fire"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.649"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0" />
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

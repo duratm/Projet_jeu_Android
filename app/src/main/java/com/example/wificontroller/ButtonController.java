@@ -168,6 +168,11 @@ public class ButtonController extends AppCompatActivity {
 
     @Override
     protected void onDestroy() {
+        try {
+            this.stayAlive.stop();
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
         new Thread(new Runnable() {
             public void run() {
                 GameMessageManager.sendMessage("EXIT");
@@ -180,6 +185,11 @@ public class ButtonController extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
+        try {
+            this.stayAlive.stop();
+        } catch (Throwable e) {
+            throw new RuntimeException(e);
+        }
         new Thread(new Runnable() {
             public void run() {
                 GameMessageManager.sendMessage("EXIT");
