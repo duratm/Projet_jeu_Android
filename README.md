@@ -1,5 +1,7 @@
 # Voici notre super application mobile (Android) !
 
+>- c'est un controller pour un jeu qui peut être trouvé à la racine du projet (AndroidGameServer.jar). Pour jouer il suffit de lancer le jar et de lancer l'application sur un téléphone android et d e saisir l'adresse ip affiché par la console du serveur.
+
 ## 1. Nous avons mis en place une **frame d'acceuil**, elle comporte:
 + une **liste déroulante** contenant l'ip, le nom et la couleur utilisés. C'est un **historique**. Cela permet de récupérer ses presets et de ne pas retaper l'ip et son nom. Toutes ses informations sont stockées dans un File spécifique à l'application.
 + Une **bannière** dans laquelle il y'a un **bouton d'aide** qui ouvre une frame pop-up (pas de nouvelle activité pour ceci). Il y'a un bouton **settings** aussi pour accéder aux paramètres de l'application, on peut changer sur cette activité la couleur de son pion.
